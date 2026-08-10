@@ -1,211 +1,172 @@
+/* =====================================================
+   UNITED HORIZONS PARTY
+   Arizona Online — Fictional RP Project
+   ===================================================== */
+
+
 /*
 =========================================================
-UNITED HORIZONS PARTY
-Arizona Online — Fictional RP Project
+ВАЖНО
+
+После создания Cloudflare Worker сюда нужно вставить
+его адрес.
+
+Например:
+
+const APPLICATION_API =
+    "https://united-horizons.workers.dev";
+
+НЕ вставляй сюда Discord Webhook.
 =========================================================
 */
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    /* =====================================================
-       SMOOTH SCROLL
-       ===================================================== */
-
-    const navigationLinks = document.querySelectorAll(
-        'a[href^="#"]'
-    );
-
-    navigationLinks.forEach(link => {
-
-        link.addEventListener("click", event => {
-
-            const targetId = link.getAttribute("href");
-
-            if (
-                !targetId ||
-                targetId === "#" ||
-                targetId.length <= 1
-            ) {
-                return;
-            }
-
-            const target = document.querySelector(targetId);
-
-            if (!target) {
-                return;
-            }
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        });
-
-    });
+const APPLICATION_API =
+    "PASTE_YOUR_CLOUDFLARE_WORKER_URL_HERE";
 
 
-    /* =====================================================
-       ACTIVE NAVIGATION
-       ===================================================== */
-
-    const sections = document.querySelectorAll(
-        "main section[id]"
-    );
-
-    const navLinks = document.querySelectorAll(
-        ".navigation a:not(.nav-button)"
-    );
-
-    const updateActiveNavigation = () => {
-
-        let currentSection = "";
-
-        sections.forEach(section => {
-
-            const sectionTop = section.offsetTop - 180;
-            const sectionBottom =
-                sectionTop + section.offsetHeight;
-
-            if (
-                window.scrollY >= sectionTop &&
-                window.scrollY < sectionBottom
-            ) {
-                currentSection = section.id;
-            }
-
-        });
-
-        navLinks.forEach(link => {
-
-            link.classList.remove("active");
-
-            const href = link.getAttribute("href");
-
-            if (href === `#${currentSection}`) {
-                link.classList.add("active");
-            }
-
-        });
-
-    };
-
-    window.addEventListener(
-        "scroll",
-        updateActiveNavigation,
-        { passive: true }
-    );
-
-    updateActiveNavigation();
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
 
-    /* =====================================================
-       SCROLL REVEAL
-       ===================================================== */
+        /* =================================================
+           SMOOTH SCROLL
+           ================================================= */
 
-    const revealElements = document.querySelectorAll(
-        ".platform-card, .leader-card, .news-card, .about-main, .about-card"
-    );
+        document
+            .querySelectorAll('a[href^="#"]')
+            .forEach(link => {
 
-    revealElements.forEach(element => {
+                link.addEventListener(
+                    "click",
+                    event => {
 
-        element.style.opacity = "0";
-        element.style.transform = "translateY(25px)";
-        element.style.transition =
-            "opacity 0.7s ease, transform 0.7s ease";
+                        const id =
+                            link.getAttribute("href");
 
-    });
+                        if (
+                            !id ||
+                            id === "#"
+                        ) {
+                            return;
+                        }
 
+                        const target =
+                            document.querySelector(id);
 
-    const revealObserver = new IntersectionObserver(
-        entries => {
+                        if (!target) {
+                            return;
+                        }
 
-            entries.forEach(entry => {
+                        event.preventDefault();
 
-                if (!entry.isIntersecting) {
-                    return;
-                }
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
 
-                entry.target.style.opacity = "1";
-                entry.target.style.transform =
-                    "translateY(0)";
-
-                revealObserver.unobserve(
-                    entry.target
+                    }
                 );
 
             });
 
-        },
-        {
-            threshold: 0.12
+
+        /* =================================================
+           ACTIVE NAVIGATION
+           ================================================= */
+
+        const sections =
+            document.querySelectorAll(
+                "main section[id]"
+            );
+
+        const navLinks =
+            document.querySelectorAll(
+                ".navigation a"
+            );
+
+
+        function updateNavigation() {
+
+            let current = "";
+
+            sections.forEach(section => {
+
+                const top =
+                    section.offsetTop - 200;
+
+                const bottom =
+                    top + section.offsetHeight;
+
+                if (
+                    window.scrollY >= top &&
+                    window.scrollY < bottom
+                ) {
+
+                    current =
+                        section.id;
+
+                }
+
+            });
+
+
+            navLinks.forEach(link => {
+
+                link.classList.remove(
+                    "active"
+                );
+
+                if (
+                    link.getAttribute("href") ===
+                    `#${current}`
+                ) {
+
+                    link.classList.add(
+                        "active"
+                    );
+
+                }
+
+            });
+
         }
-    );
 
 
-    revealElements.forEach(element => {
-        revealObserver.observe(element);
-    });
+        window.addEventListener(
+            "scroll",
+            updateNavigation,
+            { passive: true }
+        );
+
+        updateNavigation();
 
 
-    /* =====================================================
-       HEADER SCROLL EFFECT
-       ===================================================== */
+        /* =================================================
+           HEADER
+           ================================================= */
 
-    const header = document.querySelector(".site-header");
+        const header =
+            document.querySelector(
+                ".site-header"
+            );
 
-    const updateHeader = () => {
-
-        if (!header) {
-            return;
-        }
-
-        if (window.scrollY > 40) {
-
-            header.style.background =
-                "rgba(3, 10, 18, 0.98)";
-
-        } else {
-
-            header.style.background =
-                "rgba(7, 21, 37, 0.96)";
-
-        }
-
-    };
-
-    window.addEventListener(
-        "scroll",
-        updateHeader,
-        { passive: true }
-    );
-
-    updateHeader();
-
-
-    /* =====================================================
-       HERO PARALLAX
-       ===================================================== */
-
-    const hero = document.querySelector(".hero");
-
-    if (hero) {
 
         window.addEventListener(
             "scroll",
             () => {
 
-                const scrollPosition = window.scrollY;
+                if (
+                    window.scrollY > 40
+                ) {
 
-                if (scrollPosition < hero.offsetHeight) {
+                    header.style.background =
+                        "rgba(3,10,18,.98)";
 
-                    const heroBackground =
-                        hero.querySelector(".hero::before");
+                } else {
 
-                    hero.style.backgroundPosition =
-                        `center ${scrollPosition * 0.15}px`;
+                    header.style.background =
+                        "rgba(7,21,37,.96)";
 
                 }
 
@@ -213,62 +174,361 @@ document.addEventListener("DOMContentLoaded", () => {
             { passive: true }
         );
 
+
+        /* =================================================
+           REVEAL ANIMATION
+           ================================================= */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".platform-card, .leader-card, .about-main, .about-card"
+            );
+
+
+        revealElements.forEach(element => {
+
+            element.style.opacity = "0";
+
+            element.style.transform =
+                "translateY(25px)";
+
+            element.style.transition =
+                "opacity .7s ease, transform .7s ease";
+
+        });
+
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+                        entry.target.style.opacity =
+                            "1";
+
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    });
+
+                },
+                {
+                    threshold: .12
+                }
+            );
+
+
+        revealElements.forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+
+        /* =================================================
+           APPLICATION MODAL
+           ================================================= */
+
+        const modal =
+            document.getElementById(
+                "applicationModal"
+            );
+
+        const openButton =
+            document.getElementById(
+                "openApplication"
+            );
+
+        const closeButton =
+            document.getElementById(
+                "closeApplication"
+            );
+
+
+        function openModal() {
+
+            modal.classList.add(
+                "active"
+            );
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+        }
+
+
+        function closeModal() {
+
+            modal.classList.remove(
+                "active"
+            );
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+        }
+
+
+        openButton.addEventListener(
+            "click",
+            openModal
+        );
+
+
+        closeButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === modal
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape" &&
+                    modal.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           APPLICATION FORM
+           ================================================= */
+
+        const form =
+            document.getElementById(
+                "partyApplication"
+            );
+
+        const nickname =
+            document.getElementById(
+                "nickname"
+            );
+
+        const realAge =
+            document.getElementById(
+                "realAge"
+            );
+
+        const characterAge =
+            document.getElementById(
+                "characterAge"
+            );
+
+        const reason =
+            document.getElementById(
+                "reason"
+            );
+
+        const counter =
+            document.getElementById(
+                "reasonCounter"
+            );
+
+        const message =
+            document.getElementById(
+                "formMessage"
+            );
+
+        const submitButton =
+            document.getElementById(
+                "submitApplication"
+            );
+
+
+        reason.addEventListener(
+            "input",
+            () => {
+
+                counter.textContent =
+                    reason.value.length;
+
+            }
+        );
+
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            message.textContent =
+                text;
+
+            message.className =
+                `form-message ${type}`;
+
+        }
+
+
+        form.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                if (
+                    APPLICATION_API ===
+                    "PASTE_YOUR_CLOUDFLARE_WORKER_URL_HERE"
+                ) {
+
+                    showMessage(
+                        "Система заявок ещё не подключена.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.textContent =
+                    "SENDING...";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            APPLICATION_API,
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        nickname:
+                                            nickname.value.trim(),
+
+                                        realAge:
+                                            realAge.value,
+
+                                        characterAge:
+                                            characterAge.value,
+
+                                        reason:
+                                            reason.value.trim()
+
+                                    })
+
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.error ||
+                            "Ошибка отправки."
+                        );
+
+                    }
+
+
+                    showMessage(
+                        "✓ Заявка отправлена! Руководство партии рассмотрит её в ближайшее время.",
+                        "success"
+                    );
+
+
+                    form.reset();
+
+                    counter.textContent =
+                        "0";
+
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    showMessage(
+                        "Не удалось отправить заявку. Попробуйте ещё раз.",
+                        "error"
+                    );
+
+                }
+
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.textContent =
+                    "SUBMIT APPLICATION";
+
+            }
+        );
+
+
+        /* =================================================
+           CURRENT YEAR
+           ================================================= */
+
+        document
+            .querySelectorAll(
+                "[data-current-year]"
+            )
+            .forEach(element => {
+
+                element.textContent =
+                    new Date()
+                        .getFullYear();
+
+            });
+
+
     }
-
-
-    /* =====================================================
-       CURRENT YEAR
-       ===================================================== */
-
-    const yearElements =
-        document.querySelectorAll("[data-current-year]");
-
-    yearElements.forEach(element => {
-
-        element.textContent =
-            new Date().getFullYear();
-
-    });
-
-
-    /* =====================================================
-       BUTTON INTERACTION
-       ===================================================== */
-
-    const buttons =
-        document.querySelectorAll(".button");
-
-    buttons.forEach(button => {
-
-        button.addEventListener("mouseenter", () => {
-
-            button.style.transform =
-                "translateY(-2px)";
-
-        });
-
-        button.addEventListener("mouseleave", () => {
-
-            button.style.transform =
-                "translateY(0)";
-
-        });
-
-    });
-
-
-    /* =====================================================
-       CONSOLE MESSAGE
-       ===================================================== */
-
-    console.log(
-        "%cUNITED HORIZONS PARTY",
-        "font-size: 20px; font-weight: 900;"
-    );
-
-    console.log(
-        "%cArizona Online — Fictional Roleplay Project",
-        "font-size: 12px;"
-    );
-
-});
+);
