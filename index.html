@@ -1,575 +1,830 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>United Horizons Party — Arizona Online</title>
-
-    <meta name="description"
-          content="United Horizons Party — игровая политическая партия проекта Arizona Online.">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(circle at 50% 0%, #13233b 0%, #050c16 55%, #02060b 100%);
-            color: #fff;
-            min-height: 100vh;
-        }
-
-        /* =========================================
-           DISCLAIMER
-        ========================================= */
-
-        .disclaimer {
-            width: 100%;
-            padding: 10px 20px;
-            background: #070d17;
-            border-bottom: 1px solid #1d3049;
-            color: #8f9daf;
-            text-align: center;
-            font-size: 12px;
-            letter-spacing: .3px;
-        }
-
-        .disclaimer strong {
-            color: #d51f35;
-        }
-
-        /* =========================================
-           HEADER
-        ========================================= */
-
-        header {
-            width: 100%;
-            border-bottom: 1px solid rgba(255,255,255,.08);
-            background: rgba(3, 9, 17, .88);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-        }
-
-        .header-inner {
-            max-width: 1200px;
-            margin: auto;
-            height: 78px;
-            padding: 0 25px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            text-decoration: none;
-            color: white;
-        }
-
-        .brand-mark {
-            width: 42px;
-            height: 42px;
-            border: 1px solid #30445e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #0a1727;
-            font-size: 21px;
-        }
-
-        .brand-text {
-            line-height: 1;
-        }
-
-        .brand-text strong {
-            display: block;
-            font-size: 16px;
-            letter-spacing: 3px;
-        }
-
-        .brand-text span {
-            display: block;
-            margin-top: 5px;
-            font-size: 9px;
-            letter-spacing: 2px;
-            color: #d51f35;
-            font-weight: bold;
-        }
-
-        nav {
-            display: flex;
-            gap: 28px;
-        }
-
-        nav a {
-            color: #aab5c5;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
-            transition: .2s;
-        }
-
-        nav a:hover {
-            color: #fff;
-        }
-
-        /* =========================================
-           HERO
-        ========================================= */
-
-        .hero {
-            max-width: 1200px;
-            min-height: 610px;
-            margin: auto;
-            padding: 100px 25px 80px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 70px;
-        }
-
-        .hero-content {
-            max-width: 650px;
-        }
-
-        .eyebrow {
-            color: #d51f35;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 5px;
-            margin-bottom: 22px;
-        }
-
-        .hero h1 {
-            font-size: clamp(52px, 7vw, 92px);
-            line-height: .91;
-            letter-spacing: -4px;
-            margin-bottom: 28px;
-        }
-
-        .hero h1 span {
-            color: #d51f35;
-        }
-
-        .hero-description {
-            color: #aab6c7;
-            font-size: 17px;
-            line-height: 1.7;
-            max-width: 590px;
-            margin-bottom: 35px;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 13px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            border: none;
-            padding: 16px 28px;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: .2s;
-        }
-
-        .btn-primary {
-            background: #b51d31;
-            color: white;
-            box-shadow: 0 8px 30px rgba(181,29,49,.18);
-        }
-
-        .btn-primary:hover {
-            background: #d42139;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            border: 1px solid #344861;
-            color: #dce4ed;
-            background: #091525;
-        }
-
-        .btn-secondary:hover {
-            border-color: #60748e;
-        }
-
-        /* =========================================
-           EMBLEM
-        ========================================= */
-
-        .hero-emblem {
-            width: 320px;
-            height: 320px;
-            flex-shrink: 0;
-
-            border: 1px solid #23364f;
-            background:
-                radial-gradient(circle, #152941 0%, #071321 65%, #050b13 100%);
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            box-shadow:
-                0 0 80px rgba(26,65,105,.15),
-                inset 0 0 60px rgba(0,0,0,.3);
-        }
-
-        .eagle {
-            font-size: 110px;
-            line-height: 1;
-            margin-bottom: 15px;
-        }
-
-        .emblem-title {
-            font-weight: bold;
-            letter-spacing: 5px;
-            font-size: 15px;
-        }
-
-        .emblem-subtitle {
-            margin-top: 7px;
-            font-size: 9px;
-            color: #d51f35;
-            letter-spacing: 3px;
-            font-weight: bold;
-        }
-
-        /* =========================================
-           SECTION
-        ========================================= */
-
-        .section {
-            max-width: 1200px;
-            margin: auto;
-            padding: 80px 25px;
-        }
-
-        .section-title {
-            margin-bottom: 35px;
-        }
-
-        .section-title small {
-            color: #d51f35;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 4px;
-        }
-
-        .section-title h2 {
-            font-size: 38px;
-            margin-top: 10px;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .card {
-            background: #091525;
-            border: 1px solid #1d3048;
-            padding: 30px;
-            min-height: 190px;
-        }
-
-        .card-number {
-            color: #d51f35;
-            font-weight: bold;
-            font-size: 12px;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-        }
-
-        .card h3 {
-            margin-bottom: 12px;
-            font-size: 19px;
-        }
-
-        .card p {
-            color: #8e9caf;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        /* =========================================
-           JOIN MODAL
-        ========================================= */
-
-        .modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,.78);
-            backdrop-filter: blur(8px);
-
-            display: none;
-            align-items: center;
-            justify-content: center;
-
-            padding: 20px;
-            z-index: 100;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-box {
-            width: 100%;
-            max-width: 650px;
-            max-height: 92vh;
-            overflow-y: auto;
-
-            background:
-                linear-gradient(145deg, #0d1c2e, #071321);
-
-            border: 1px solid #2a3c53;
-            padding: 40px;
-            position: relative;
-
-            box-shadow: 0 30px 100px rgba(0,0,0,.6);
-        }
-
-        .close {
-            position: absolute;
-            top: 17px;
-            right: 17px;
-
-            width: 38px;
-            height: 38px;
-
-            background: transparent;
-            color: white;
-            border: 1px solid #294057;
-
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            background: #b51d31;
-            border-color: #b51d31;
-        }
-
-        .modal-label {
-            color: #d51f35;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 4px;
-            margin-bottom: 14px;
-        }
-
-        .modal-box h2 {
-            font-size: 46px;
-            line-height: 1;
-            margin-bottom: 14px;
-        }
-
-        .modal-box h2 span {
-            color: #d51f35;
-        }
-
-        .modal-description {
-            color: #8e9caf;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 22px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 10px;
-            letter-spacing: 2px;
-            font-weight: bold;
-            margin-bottom: 9px;
-            text-transform: uppercase;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            border: 1px solid #243951;
-            background: #071321;
-            color: white;
-
-            padding: 15px;
-            font-size: 14px;
-            outline: none;
-
-            transition: .2s;
-        }
-
-        input:focus,
-        textarea:focus {
-            border-color: #b51d31;
-            box-shadow: 0 0 0 2px rgba(181,29,49,.1);
-        }
-
-        textarea {
-            min-height: 125px;
-            resize: vertical;
-            font-family: inherit;
-        }
-
-        .submit {
-            width: 100%;
-            border: none;
-            padding: 17px;
-
-            background: #b51d31;
-            color: white;
-
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 3px;
-
-            cursor: pointer;
-            transition: .2s;
-        }
-
-        .submit:hover {
-            background: #d42139;
-        }
-
-        .submit:disabled {
-            opacity: .6;
-            cursor: wait;
-        }
-
-        .message {
-            display: none;
-            padding: 14px;
-            margin-bottom: 18px;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .message.success {
-            display: block;
-            background: rgba(31, 126, 80, .13);
-            border: 1px solid #267b54;
-            color: #75d5a6;
-        }
-
-        .message.error {
-            display: block;
-            background: rgba(181, 29, 49, .12);
-            border: 1px solid #b51d31;
-            color: #ff8796;
-        }
-
-        /* =========================================
-           FOOTER
-        ========================================= */
-
-        footer {
-            border-top: 1px solid #17283d;
-            background: #040a12;
-            padding: 35px 25px;
-            text-align: center;
-        }
-
-        footer strong {
-            letter-spacing: 3px;
-            font-size: 13px;
-        }
-
-        footer p {
-            margin-top: 10px;
-            color: #69778a;
-            font-size: 11px;
-        }
-
-        /* =========================================
-           MOBILE
-        ========================================= */
-
-        @media (max-width: 800px) {
-
-            nav {
-                display: none;
-            }
-
-            .hero {
-                min-height: auto;
-                padding-top: 70px;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .hero-emblem {
-                width: 100%;
-                height: 250px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-box {
-                padding: 30px 22px;
-            }
-
-            .modal-box h2 {
-                font-size: 38px;
-            }
-        }
-
-        @media (max-width: 480px) {
-
-            .hero h1 {
-                font-size: 54px;
-            }
-
-            .hero-description {
-                font-size: 15px;
-            }
-
-            .buttons {
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>United Horizons Party | Arizona Online</title>
+
+<meta name="description"
+content="United Horizons Party — вымышленная политическая партия игрового проекта Arizona Online.">
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 50% -10%, #162c48 0%, #07111f 42%, #02060b 100%);
+    color: #fff;
+    line-height: 1.55;
+}
+
+/* =========================================
+   DISCLAIMER
+========================================= */
+
+.disclaimer {
+    width: 100%;
+    padding: 10px 20px;
+
+    background: #03070d;
+    border-bottom: 1px solid #1d3047;
+
+    color: #8997aa;
+    text-align: center;
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.disclaimer strong {
+    color: #e12a42;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    background: rgba(3, 9, 17, .93);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.header-inner {
+    max-width: 1200px;
+    height: 78px;
+
+    margin: auto;
+    padding: 0 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand-logo {
+    width: 43px;
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0b192a;
+    border: 1px solid #30445d;
+
+    font-size: 21px;
+}
+
+.brand-name {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.brand-sub {
+    margin-top: 3px;
+
+    color: #e12740;
+
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #9caabd;
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    transition: .2s;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+
+/* =========================================
+   GENERAL
+========================================= */
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 25px;
+}
+
+.section {
+    padding: 90px 0;
+
+    border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.section-kicker {
+    color: #e12740;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.section-title {
+    margin-top: 8px;
+
+    font-size: 40px;
+    line-height: 1.1;
+}
+
+.section-description {
+    max-width: 700px;
+
+    margin-top: 12px;
+
+    color: #8f9caf;
+    font-size: 14px;
+}
+
+.cards {
+    margin-top: 35px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.card {
+    padding: 28px;
+
+    background:
+        linear-gradient(145deg, #0c1b2d, #071321);
+
+    border: 1px solid #20364e;
+}
+
+.card-number {
+    margin-bottom: 18px;
+
+    color: #e12740;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+
+    font-size: 18px;
+}
+
+.card p,
+.card li {
+    color: #8f9caf;
+
+    font-size: 13px;
+}
+
+.card ul {
+    padding-left: 18px;
+}
+
+.wide {
+    grid-column: span 2;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    min-height: 650px;
+
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+
+    align-items: center;
+
+    gap: 70px;
+}
+
+.eyebrow {
+    color: #e12740;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+.hero h1 {
+    margin: 18px 0 25px;
+
+    font-size: clamp(58px, 8vw, 100px);
+    line-height: .88;
+
+    letter-spacing: -5px;
+}
+
+.hero h1 span {
+    color: #e12740;
+}
+
+.hero-text {
+    max-width: 650px;
+
+    color: #a1adbd;
+
+    font-size: 16px;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+
+    padding: 15px 24px;
+
+    border: 1px solid #2b425c;
+
+    color: #fff;
+    background: #081522;
+
+    text-decoration: none;
+
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: #b71e34;
+    border-color: #b71e34;
+}
+
+.btn-primary:hover {
+    background: #df2942;
+}
+
+.hero-emblem {
+    min-height: 370px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    background:
+        radial-gradient(circle, #17304c 0%, #091727 60%, #050b13 100%);
+
+    border: 1px solid #263e58;
+
+    overflow: hidden;
+}
+
+.hero-emblem:before {
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    border: 1px solid #2a4562;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 25px rgba(30,60,92,.08),
+        0 0 0 50px rgba(30,60,92,.04);
+}
+
+.eagle {
+    position: relative;
+
+    font-size: 105px;
+}
+
+.emblem-name {
+    position: relative;
+
+    margin-top: 15px;
+
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 5px;
+}
+
+.emblem-motto {
+    position: relative;
+
+    margin-top: 5px;
+
+    color: #e12740;
+
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+
+/* =========================================
+   PEOPLE
+========================================= */
+
+.people {
+    margin-top: 35px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 17px;
+}
+
+.person {
+    padding: 25px;
+
+    background: #091625;
+
+    border: 1px solid #20364e;
+}
+
+.person-name {
+    font-size: 17px;
+    font-weight: 900;
+}
+
+.person-role {
+    margin: 5px 0 12px;
+
+    color: #e12740;
+
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.person-description {
+    color: #8997aa;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   QUOTE
+========================================= */
+
+.quote {
+    margin-top: 25px;
+
+    padding: 20px 24px;
+
+    border-left: 3px solid #d5223b;
+
+    background: #091625;
+
+    color: #dce4ed;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+.table-wrapper {
+    margin-top: 35px;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #091625;
+
+    border: 1px solid #20364e;
+}
+
+th,
+td {
+    padding: 14px;
+
+    border-bottom: 1px solid #1a2c41;
+
+    text-align: left;
+
+    font-size: 12px;
+}
+
+th {
+    background: #0d1d30;
+
+    color: #fff;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+td {
+    color: #8997aa;
+}
+
+.signature {
+    color: #e5ebf2;
+
+    font-family: Georgia, serif;
+
+    font-style: italic;
+
+    font-size: 17px;
+}
+
+.empty {
+    color: #e12740;
+}
+
+
+/* =========================================
+   JOIN
+========================================= */
+
+.join-grid {
+    margin-top: 35px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,.82);
+
+    backdrop-filter: blur(9px);
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    position: relative;
+
+    width: 100%;
+    max-width: 650px;
+
+    max-height: 94vh;
+
+    overflow-y: auto;
+
+    padding: 38px;
+
+    background:
+        linear-gradient(145deg, #0d1d30, #071321);
+
+    border: 1px solid #2a4059;
+
+    box-shadow: 0 30px 100px rgba(0,0,0,.65);
+}
+
+.close {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 38px;
+    height: 38px;
+
+    background: transparent;
+
+    color: white;
+
+    border: 1px solid #294057;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.close:hover {
+    background: #b71e34;
+}
+
+.modal-kicker {
+    color: #e12740;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    letter-spacing: 4px;
+}
+
+.modal-title {
+    margin: 12px 0;
+
+    font-size: 45px;
+    line-height: 1;
+}
+
+.modal-title span {
+    color: #e12740;
+}
+
+.modal-description {
+    margin-bottom: 28px;
+
+    color: #8f9caf;
+
+    font-size: 13px;
+}
+
+.form-group {
+    margin-bottom: 19px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+input,
+textarea {
+    width: 100%;
+
+    padding: 14px;
+
+    background: #071321;
+
+    color: #fff;
+
+    border: 1px solid #263c55;
+
+    outline: none;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #d5223b;
+}
+
+textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+.submit {
+    width: 100%;
+
+    padding: 16px;
+
+    border: 0;
+
+    background: #b71e34;
+
+    color: #fff;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    letter-spacing: 3px;
+
+    cursor: pointer;
+}
+
+.submit:hover {
+    background: #df2942;
+}
+
+.submit:disabled {
+    opacity: .6;
+
+    cursor: wait;
+}
+
+.message {
+    display: none;
+
+    margin-bottom: 15px;
+
+    padding: 12px;
+
+    font-size: 12px;
+}
+
+.message.success {
+    display: block;
+
+    background: #10281f;
+
+    border: 1px solid #287954;
+
+    color: #7be0ae;
+}
+
+.message.error {
+    display: block;
+
+    background: #28131a;
+
+    border: 1px solid #b71e34;
+
+    color: #ff8796;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    padding: 40px 20px;
+
+    border-top: 1px solid #17283d;
+
+    background: #03070d;
+
+    text-align: center;
+}
+
+footer strong {
+    font-size: 12px;
+
+    letter-spacing: 3px;
+}
+
+footer p {
+    margin-top: 7px;
+
+    color: #65758a;
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:850px) {
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+
+        padding: 70px 0;
+    }
+
+    .hero-emblem {
+        min-height: 300px;
+    }
+
+    .cards,
+    .people,
+    .join-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wide {
+        grid-column: auto;
+    }
+}
+
+@media(max-width:500px) {
+
+    .container {
+        padding: 0 16px;
+    }
+
+    .hero h1 {
+        font-size: 58px;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+
+        text-align: center;
+    }
+
+    .modal-box {
+        padding: 30px 20px;
+    }
+
+    .modal-title {
+        font-size: 37px;
+    }
+}
+
+</style>
 </head>
+
 
 <body>
 
+
 <!-- =========================================
-     ВАЖНОЕ УВЕДОМЛЕНИЕ
+     УВЕДОМЛЕНИЕ
 ========================================= -->
 
 <div class="disclaimer">
-    <strong>ВНИМАНИЕ:</strong>
-    United Horizons Party — вымышленная игровая партия.
-    Проект не связан с реальными политическими партиями, государственными органами или политической деятельностью.
-    Партия создана исключительно для игрового проекта Arizona Online.
+
+<strong>ВНИМАНИЕ:</strong>
+
+United Horizons Party — полностью вымышленная партия,
+созданная исключительно для игрового проекта Arizona Online.
+
+Сайт, должности, персонажи, документы, программа и политическая
+деятельность не относятся к реальному миру.
+
 </div>
 
 
@@ -578,166 +833,1011 @@
 ========================================= -->
 
 <header>
-    <div class="header-inner">
 
-        <a href="#" class="brand">
+<div class="header-inner">
 
-            <div class="brand-mark">
-                ★
-            </div>
+<a href="#top" class="brand">
 
-            <div class="brand-text">
-                <strong>UNITED HORIZONS</strong>
-                <span>PARTY</span>
-            </div>
+<div class="brand-logo">
+★
+</div>
 
-        </a>
+<div>
 
-        <nav>
-            <a href="#about">О ПАРТИИ</a>
-            <a href="#values">ЦЕННОСТИ</a>
-            <a href="#join">ВСТУПИТЬ</a>
-        </nav>
+<div class="brand-name">
+UNITED HORIZONS
+</div>
 
-    </div>
+<div class="brand-sub">
+PARTY
+</div>
+
+</div>
+
+</a>
+
+
+<nav>
+
+<a href="#party">О ПАРТИИ</a>
+
+<a href="#leadership">РУКОВОДСТВО</a>
+
+<a href="#ideology">ИДЕОЛОГИЯ</a>
+
+<a href="#goals">ЦЕЛИ</a>
+
+<a href="#charter">УСТАВ</a>
+
+<a href="#members">СОСТАВ</a>
+
+<a href="#join">ВСТУПИТЬ</a>
+
+</nav>
+
+</div>
+
 </header>
+
+
+<main id="top">
 
 
 <!-- =========================================
      HERO
 ========================================= -->
 
-<main>
+<section class="container hero">
 
-<section class="hero" id="about">
+<div>
 
-    <div class="hero-content">
+<div class="eyebrow">
+UNITED HORIZONS PARTY · ARIZONA ONLINE
+</div>
 
-        <div class="eyebrow">
-            UNITED HORIZONS PARTY
-        </div>
+<h1>
+UNITED<br>
+<span>HORIZONS.</span>
+</h1>
 
-        <h1>
-            UNITED<br>
-            <span>HORIZONS.</span>
-        </h1>
+<p class="hero-text">
 
-        <p class="hero-description">
-            United Horizons Party — игровое политическое движение
-            Arizona Online, объединяющее граждан вокруг идеи развития,
-            свободы, безопасности и сильного будущего.
-        </p>
+Политическое движение игрового штата,
+объединяющее граждан вокруг развития,
+свободы, безопасности и ответственного управления.
 
-        <div class="buttons">
+</p>
 
-            <button class="btn btn-primary" onclick="openModal()">
-                JOIN US
-            </button>
+<div class="hero-buttons">
 
-            <a href="#values" class="btn btn-secondary">
-                НАШИ ЦЕННОСТИ
-            </a>
+<a href="#join" class="btn btn-primary">
+ВСТУПИТЬ В ПАРТИЮ
+</a>
 
-        </div>
+<a href="#party" class="btn">
+УЗНАТЬ О ПАРТИИ
+</a>
 
-    </div>
+</div>
+
+</div>
 
 
-    <div class="hero-emblem">
+<div class="hero-emblem">
 
-        <div class="eagle">
-            🦅
-        </div>
+<div class="eagle">
+🦅
+</div>
 
-        <div class="emblem-title">
-            UNITED HORIZONS
-        </div>
+<div class="emblem-name">
+UNITED HORIZONS
+</div>
 
-        <div class="emblem-subtitle">
-            UNITY · TODAY · HORIZONS
-        </div>
+<div class="emblem-motto">
+UNITY TODAY · HORIZONS FOREVER
+</div>
 
-    </div>
+</div>
 
 </section>
 
 
 <!-- =========================================
-     VALUES
+     О ПАРТИИ
 ========================================= -->
 
-<section class="section" id="values">
+<section class="section" id="party">
 
-    <div class="section-title">
-        <small>OUR PRINCIPLES</small>
-        <h2>Наши ценности</h2>
-    </div>
+<div class="container">
 
-    <div class="cards">
+<div class="section-kicker">
+01 · ABOUT
+</div>
 
-        <div class="card">
-            <div class="card-number">01 / СВОБОДА</div>
-            <h3>Свобода граждан</h3>
-            <p>
-                Мы выступаем за уважение прав граждан,
-                личную свободу и равные возможности
-                каждого участника игрового мира.
-            </p>
-        </div>
+<h2 class="section-title">
+О партии
+</h2>
 
-        <div class="card">
-            <div class="card-number">02 / РАЗВИТИЕ</div>
-            <h3>Развитие штата</h3>
-            <p>
-                Поддержка экономических, социальных
-                и инфраструктурных инициатив,
-                способствующих развитию Arizona Online.
-            </p>
-        </div>
+<p class="section-description">
 
-        <div class="card">
-            <div class="card-number">03 / БЕЗОПАСНОСТЬ</div>
-            <h3>Безопасность</h3>
-            <p>
-                Законность, порядок и эффективная
-                работа государственных структур
-                являются важной частью нашего курса.
-            </p>
-        </div>
+United Horizons Party — вымышленная политическая партия
+игрового проекта Arizona Online.
 
-        <div class="card">
-            <div class="card-number">04 / ЕДИНСТВО</div>
-            <h3>Единство общества</h3>
-            <p>
-                Мы стремимся объединять игроков
-                с разными взглядами вокруг общих
-                целей и интересов штата.
-            </p>
-        </div>
+Партия создана для участия игроков в политической жизни
+штата, разработки инициатив и формирования команды,
+готовой работать ради развития игрового мира.
 
-        <div class="card">
-            <div class="card-number">05 / ОТВЕТСТВЕННОСТЬ</div>
-            <h3>Ответственное управление</h3>
-            <p>
-                Представители партии должны отвечать
-                за свои решения и действовать
-                в интересах игрового сообщества.
-            </p>
-        </div>
+</p>
 
-        <div class="card">
-            <div class="card-number">06 / БУДУЩЕЕ</div>
-            <h3>Новые горизонты</h3>
-            <p>
-                Мы смотрим вперёд и поддерживаем
-                идеи, которые делают игровой процесс
-                интереснее для всех участников.
-            </p>
-        </div>
 
-    </div>
+<div class="cards">
+
+<div class="card">
+
+<div class="card-number">
+01
+</div>
+
+<h3>
+Единство
+</h3>
+
+<p>
+Объединение игроков с разными взглядами
+ради общих целей и стабильного развития штата.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+02
+</div>
+
+<h3>
+Ответственность
+</h3>
+
+<p>
+Каждый представитель партии отвечает
+за свои решения и обязан действовать открыто.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+03
+</div>
+
+<h3>
+Развитие
+</h3>
+
+<p>
+Поддержка реформ, экономики,
+государственных институтов и новых инициатив.
+</p>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
+
+
+<!-- =========================================
+     РУКОВОДСТВО
+========================================= -->
+
+<section class="section" id="leadership">
+
+<div class="container">
+
+<div class="section-kicker">
+02 · LEADERSHIP
+</div>
+
+<h2 class="section-title">
+Руководство партии
+</h2>
+
+<p class="section-description">
+Основные руководящие лица United Horizons Party.
+</p>
+
+
+<div class="people">
+
+
+<div class="person">
+
+<div class="person-name">
+Александр Морган
+</div>
+
+<div class="person-role">
+ОСНОВАТЕЛЬ · ПРЕДСЕДАТЕЛЬ
+</div>
+
+<div class="person-description">
+
+Основатель United Horizons Party.
+Осуществляет общее руководство партией,
+утверждает партийные документы и представляет
+организацию перед гражданами.
+
+</div>
+
+</div>
+
+
+<div class="person">
+
+<div class="person-name">
+Итан Брукс
+</div>
+
+<div class="person-role">
+ЗАМЕСТИТЕЛЬ ПРЕДСЕДАТЕЛЯ
+</div>
+
+<div class="person-description">
+
+Координирует внутреннюю работу партии,
+помогает руководству и отвечает за взаимодействие
+с однопартийцами.
+
+</div>
+
+</div>
+
+
+<div class="person">
+
+<div class="person-name">
+Джеймс Уитмор
+</div>
+
+<div class="person-role">
+КАНДИДАТ НА ПОСТ ГУБЕРНАТОРА
+</div>
+
+<div class="person-description">
+
+Кандидат United Horizons Party
+в действующей игровой предвыборной гонке
+за пост губернатора.
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================
+     ИДЕОЛОГИЯ
+========================================= -->
+
+<section class="section" id="ideology">
+
+<div class="container">
+
+<div class="section-kicker">
+03 · IDEOLOGY
+</div>
+
+<h2 class="section-title">
+Идеология и символика
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="card-number">
+IDEOLOGY
+</div>
+
+<h3>
+Гражданский центризм
+</h3>
+
+<p>
+
+Прагматичный подход к управлению,
+при котором свобода граждан,
+общественная безопасность и эффективность
+государства должны находиться в равновесии.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+COLORS
+</div>
+
+<h3>
+Синий · Белый · Красный
+</h3>
+
+<p>
+
+Синий — стабильность и доверие.
+Белый — открытость и честность.
+Красный — решительность и действие.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+SYMBOL
+</div>
+
+<h3>
+Орел и горизонт
+</h3>
+
+<p>
+
+Орел символизирует силу и свободу,
+а горизонт — движение вперёд
+и новые возможности.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="quote">
+
+«UNITY TODAY. HORIZONS FOREVER.»
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================
+     ЦЕЛИ
+========================================= -->
+
+<section class="section" id="goals">
+
+<div class="container">
+
+<div class="section-kicker">
+04 · GOALS
+</div>
+
+<h2 class="section-title">
+Цели партии
+</h2>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="card-number">01</div>
+
+<h3>
+Свобода граждан
+</h3>
+
+<p>
+Защита игровых прав и равных возможностей
+для всех жителей штата.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">02</div>
+
+<h3>
+Безопасность
+</h3>
+
+<p>
+Развитие взаимодействия государственных
+структур и общественного порядка.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">03</div>
+
+<h3>
+Развитие экономики
+</h3>
+
+<p>
+Поддержка предпринимателей,
+рабочих мест и экономических инициатив.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">04</div>
+
+<h3>
+Инфраструктура
+</h3>
+
+<p>
+Улучшение городов, транспорта
+и общественных объектов игрового мира.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">05</div>
+
+<h3>
+Открытая политика
+</h3>
+
+<p>
+Обсуждение инициатив с гражданами
+и понятная отчётность представителей.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">06</div>
+
+<h3>
+Новые горизонты
+</h3>
+
+<p>
+Создание новых игровых инициатив,
+реформ и общественных проектов.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================
+     УСТАВ
+========================================= -->
+
+<section class="section" id="charter">
+
+<div class="container">
+
+<div class="section-kicker">
+05 · CHARTER
+</div>
+
+<h2 class="section-title">
+Устав партии
+</h2>
+
+<p class="section-description">
+Основные положения внутреннего устройства
+United Horizons Party.
+</p>
+
+
+<div class="cards">
+
+
+<div class="card wide">
+
+<div class="card-number">
+ГЛАВА I
+</div>
+
+<h3>
+Общие положения
+</h3>
+
+<p>
+
+1.1. United Horizons Party является
+вымышленным игровым политическим объединением.
+
+<br><br>
+
+1.2. Деятельность партии осуществляется
+исключительно в рамках правил Arizona Online.
+
+<br><br>
+
+1.3. Официальное название организации —
+United Horizons Party.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+ГЛАВА II
+</div>
+
+<h3>
+Членство
+</h3>
+
+<p>
+
+2.1. Вступление осуществляется
+посредством подачи заявки.
+
+<br><br>
+
+2.2. Член партии обязан соблюдать
+Устав и внутренние правила.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+ГЛАВА III
+</div>
+
+<h3>
+Руководство
+</h3>
+
+<p>
+
+3.1. Высшим должностным лицом
+является Председатель партии.
+
+<br><br>
+
+3.2. Заместитель помогает Председателю
+и координирует работу партии.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+ГЛАВА IV
+</div>
+
+<h3>
+Права членов
+</h3>
+
+<p>
+
+Член партии имеет право:
+
+<br><br>
+
+— предлагать инициативы;
+<br>
+— участвовать в обсуждениях;
+<br>
+— участвовать в партийных мероприятиях.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+ГЛАВА V
+</div>
+
+<h3>
+Обязанности
+</h3>
+
+<p>
+
+Соблюдать правила проекта,
+уважать других участников,
+соблюдать решения руководства
+и не использовать партийный статус
+в личных целях.
+
+</p>
+
+</div>
+
+
+<div class="card wide">
+
+<div class="card-number">
+ГЛАВА VI
+</div>
+
+<h3>
+Прекращение членства
+</h3>
+
+<p>
+
+Членство может быть прекращено
+по собственному желанию участника,
+по решению руководства либо
+за грубое нарушение Устава партии.
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================
+     СОСТАВ ПАРТИИ
+========================================= -->
+
+<section class="section" id="members">
+
+<div class="container">
+
+<div class="section-kicker">
+06 · MEMBERS
+</div>
+
+<h2 class="section-title">
+Список однопартийцев
+</h2>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>№</th>
+<th>Имя и фамилия</th>
+<th>Должность</th>
+<th>Подпись</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+
+<td>01</td>
+
+<td>
+Александр Морган
+</td>
+
+<td>
+Председатель
+</td>
+
+<td class="signature">
+A. Morgan
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>02</td>
+
+<td>
+Итан Брукс
+</td>
+
+<td>
+Заместитель председателя
+</td>
+
+<td class="signature">
+E. Brooks
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>03</td>
+
+<td>
+Джеймс Уитмор
+</td>
+
+<td>
+Кандидат на пост губернатора
+</td>
+
+<td class="signature">
+J. Whitmore
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>04</td>
+
+<td>
+Оливер Кларк
+</td>
+
+<td>
+Член партии
+</td>
+
+<td class="signature">
+O. Clark
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>05</td>
+
+<td>
+Натан Рид
+</td>
+
+<td>
+Член партии
+</td>
+
+<td class="signature">
+N. Reed
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================
+     ЧЕРНЫЙ СПИСОК
+========================================= -->
+
+<section class="section" id="blacklist">
+
+<div class="container">
+
+<div class="section-kicker">
+07 · BLACKLIST
+</div>
+
+<h2 class="section-title">
+Чёрный список партии
+</h2>
+
+<p class="section-description">
+
+Внутренний игровой раздел для лиц,
+которым запрещено вступление
+в United Horizons Party.
+
+</p>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>№</th>
+<th>Игровой никнейм</th>
+<th>Причина</th>
+<th>Статус</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>—</td>
+
+<td>
+Пока пусто
+</td>
+
+<td>
+—
+</td>
+
+<td class="empty">
+НЕТ ЗАПИСЕЙ
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================
+     JOIN
+========================================= -->
+
+<section class="section" id="join">
+
+<div class="container">
+
+<div class="section-kicker">
+08 · JOIN US
+</div>
+
+<h2 class="section-title">
+Вступление в партию
+</h2>
+
+<p class="section-description">
+
+Хочешь стать частью United Horizons Party?
+Заполни заявку — руководство рассмотрит её.
+
+</p>
+
+
+<div class="join-grid">
+
+
+<div class="card">
+
+<div class="card-number">
+КТО НАМ НУЖЕН?
+</div>
+
+<h3>
+Мы ищем активных граждан
+</h3>
+
+<ul>
+
+<li>Активные игроки Arizona Online.</li>
+
+<li>Заинтересованные в политике.</li>
+
+<li>Готовые работать в команде.</li>
+
+<li>Уважающие правила проекта.</li>
+
+<li>Готовые предлагать свои идеи.</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-number">
+ГОТОВ ПРИСОЕДИНИТЬСЯ?
+</div>
+
+<h3>
+Подай заявку
+</h3>
+
+<p>
+
+Нажми кнопку ниже и ответь
+на четыре вопроса.
+
+</p>
+
+<div class="hero-buttons">
+
+<button
+class="btn btn-primary"
+onclick="openModal()">
+
+ПОДАТЬ ЗАЯВКУ
+
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
 
 </main>
 
@@ -747,308 +1847,341 @@
 ========================================= -->
 
 <footer>
-    <strong>UNITED HORIZONS PARTY</strong>
 
-    <p>
-        Arizona Online · Игровой проект · Fictional Political Party
-    </p>
+<strong>
+UNITED HORIZONS PARTY
+</strong>
 
-    <p>
-        © 2026 United Horizons Party
-    </p>
+<p>
+UNITY TODAY · HORIZONS FOREVER
+</p>
+
+<p>
+Arizona Online · Вымышленный игровой проект
+</p>
+
 </footer>
 
 
 <!-- =========================================
-     JOIN MODAL
+     MODAL ЗАЯВКИ
 ========================================= -->
 
-<div class="modal" id="joinModal">
+<div class="modal" id="applicationModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button class="close" onclick="closeModal()">
-            ×
-        </button>
+<button
+class="close"
+onclick="closeModal()">
 
-        <div class="modal-label">
-            UNITED HORIZONS PARTY
-        </div>
-
-        <h2>
-            JOIN <span>US.</span>
-        </h2>
-
-        <p class="modal-description">
-            Заполните заявку на вступление в United Horizons Party.
-            После отправки заявка будет передана руководству партии
-            для рассмотрения.
-        </p>
+×
+</button>
 
 
-        <form id="applicationForm">
-
-            <div class="form-group">
-
-                <label for="nickname">
-                    Ваш игровой никнейм
-                </label>
-
-                <input
-                    id="nickname"
-                    name="nickname"
-                    type="text"
-                    placeholder="Например: Abram_Alfieri"
-                    maxlength="50"
-                    required
-                >
-
-            </div>
+<div class="modal-kicker">
+UNITED HORIZONS PARTY
+</div>
 
 
-            <div class="form-group">
-
-                <label for="realAge">
-                    Сколько вам реальных лет
-                </label>
-
-                <input
-                    id="realAge"
-                    name="realAge"
-                    type="number"
-                    min="10"
-                    max="100"
-                    placeholder="Например: 17"
-                    required
-                >
-
-            </div>
+<h2 class="modal-title">
+JOIN <span>US.</span>
+</h2>
 
 
-            <div class="form-group">
+<p class="modal-description">
 
-                <label for="characterAge">
-                    Сколько лет вашему персонажу
-                </label>
+Заполните заявку на вступление
+в United Horizons Party.
 
-                <input
-                    id="characterAge"
-                    name="characterAge"
-                    type="number"
-                    min="1"
-                    max="1000"
-                    placeholder="Например: 25"
-                    required
-                >
-
-            </div>
+</p>
 
 
-            <div class="form-group">
-
-                <label for="reason">
-                    Почему вы хотите вступить в партию
-                </label>
-
-                <textarea
-                    id="reason"
-                    name="reason"
-                    maxlength="1000"
-                    placeholder="Расскажите немного о своей мотивации..."
-                    required
-                ></textarea>
-
-            </div>
+<form id="applicationForm">
 
 
-            <div id="message" class="message"></div>
+<div class="form-group">
+
+<label>
+Ваш игровой никнейм
+</label>
+
+<input
+type="text"
+id="nickname"
+required
+maxlength="40"
+placeholder="Например: Abram_Alfieri">
+
+</div>
 
 
-            <button
-                type="submit"
-                class="submit"
-                id="submitButton"
-            >
-                SUBMIT APPLICATION
-            </button>
+<div class="form-group">
 
-        </form>
+<label>
+Сколько вам реальных лет
+</label>
 
-    </div>
+<input
+type="number"
+id="realAge"
+min="14"
+max="100"
+required
+placeholder="18">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Сколько лет вашему персонажу
+</label>
+
+<input
+type="number"
+id="characterAge"
+min="1"
+max="150"
+required
+placeholder="30">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Почему вы хотите вступить в партию
+</label>
+
+<textarea
+id="reason"
+required
+maxlength="1000"
+placeholder="Расскажите о своей мотивации..."></textarea>
+
+</div>
+
+
+<div
+id="message"
+class="message">
+</div>
+
+
+<button
+type="submit"
+class="submit"
+id="submitButton">
+
+SUBMIT APPLICATION
+
+</button>
+
+
+</form>
+
+</div>
 
 </div>
 
 
 <script>
 
-    /* =========================================
-       НАСТРОЙКА WORKER
-    ========================================= */
+/* =========================================
+   CLOUDFLARE WORKER
+========================================= */
 
-    /*
-       Здесь должен находиться адрес твоего
-       Cloudflare Worker.
-
-       Сейчас используется твой Worker:
-    */
-
-    const WORKER_URL =
-        "https://united-horizons-applications.hdkr6795.workers.dev";
+const WORKER_URL =
+"https://united-horizons-applications.hdkr6795.workers.dev/";
 
 
-    /* =========================================
-       ОТКРЫТИЕ ФОРМЫ
-    ========================================= */
+/* =========================================
+   ОТКРЫТИЕ ФОРМЫ
+========================================= */
 
-    function openModal() {
+function openModal() {
 
-        document
-            .getElementById("joinModal")
-            .classList.add("active");
+    document
+        .getElementById("applicationModal")
+        .classList.add("active");
+
+    document.body.style.overflow = "hidden";
+}
+
+
+/* =========================================
+   ЗАКРЫТИЕ ФОРМЫ
+========================================= */
+
+function closeModal() {
+
+    document
+        .getElementById("applicationModal")
+        .classList.remove("active");
+
+    document.body.style.overflow = "";
+}
+
+
+/* =========================================
+   ЗАКРЫТИЕ ПО ESC
+========================================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        closeModal();
 
     }
 
+});
 
-    /* =========================================
-       ЗАКРЫТИЕ ФОРМЫ
-    ========================================= */
 
-    function closeModal() {
+/* =========================================
+   КЛИК ПО ФОНУ
+========================================= */
 
-        document
-            .getElementById("joinModal")
-            .classList.remove("active");
+document
+.getElementById("applicationModal")
+.addEventListener("click", function(event) {
+
+    if (event.target === this) {
+
+        closeModal();
 
     }
 
+});
 
-    /* Закрытие при клике по тёмному фону */
 
-    document
-        .getElementById("joinModal")
-        .addEventListener("click", function(event) {
+/* =========================================
+   ОТПРАВКА ЗАЯВКИ
+========================================= */
 
-            if (event.target === this) {
-                closeModal();
+document
+.getElementById("applicationForm")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+
+    const button =
+        document.getElementById("submitButton");
+
+    const message =
+        document.getElementById("message");
+
+
+    const nickname =
+        document.getElementById("nickname").value.trim();
+
+    const realAge =
+        document.getElementById("realAge").value;
+
+    const characterAge =
+        document.getElementById("characterAge").value;
+
+    const reason =
+        document.getElementById("reason").value.trim();
+
+
+    button.disabled = true;
+
+    button.textContent = "SENDING...";
+
+    message.className = "message";
+
+    message.textContent = "";
+
+
+    const application = {
+
+        nickname: nickname,
+
+        realAge: realAge,
+
+        characterAge: characterAge,
+
+        reason: reason
+
+    };
+
+
+    try {
+
+        const response = await fetch(
+            WORKER_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(application)
             }
-
-        });
-
-
-    /* =========================================
-       ОТПРАВКА ЗАЯВКИ
-    ========================================= */
-
-    document
-        .getElementById("applicationForm")
-        .addEventListener("submit", async function(event) {
-
-            event.preventDefault();
-
-            const nickname =
-                document.getElementById("nickname").value.trim();
-
-            const realAge =
-                document.getElementById("realAge").value;
-
-            const characterAge =
-                document.getElementById("characterAge").value;
-
-            const reason =
-                document.getElementById("reason").value.trim();
-
-            const button =
-                document.getElementById("submitButton");
-
-            const message =
-                document.getElementById("message");
+        );
 
 
-            /* Сбрасываем старое сообщение */
-
-            message.className = "message";
-            message.textContent = "";
+        const result =
+            await response.json();
 
 
-            /* Блокируем кнопку */
+        if (
+            !response.ok ||
+            result.success === false
+        ) {
 
-            button.disabled = true;
-            button.textContent = "SENDING...";
+            throw new Error(
+                result.message ||
+                "Ошибка отправки заявки"
+            );
 
-
-            try {
-
-                const response = await fetch(WORKER_URL, {
-
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        nickname: nickname,
-                        realAge: realAge,
-                        characterAge: characterAge,
-                        reason: reason
-
-                    })
-
-                });
+        }
 
 
-                const data = await response.json();
+        message.className =
+            "message success";
 
 
-                if (!response.ok || !data.success) {
-
-                    throw new Error(
-                        data.message || "Не удалось отправить заявку."
-                    );
-
-                }
+        message.textContent =
+            "Заявка успешно отправлена! " +
+            "Руководство партии получит её " +
+            "для рассмотрения.";
 
 
-                /* =================================
-                   УСПЕШНАЯ ОТПРАВКА
-                ================================= */
-
-                message.className = "message success";
-
-                message.textContent =
-                    "✓ Заявка успешно отправлена! Руководство United Horizons Party рассмотрит её в ближайшее время.";
+        document
+            .getElementById("applicationForm")
+            .reset();
 
 
-                document
-                    .getElementById("applicationForm")
-                    .reset();
+    } catch (error) {
 
 
-                button.textContent = "APPLICATION SENT";
+        message.className =
+            "message error";
 
 
-            } catch (error) {
-
-                console.error(error);
-
-
-                /* =================================
-                   ОШИБКА
-                ================================= */
-
-                message.className = "message error";
-
-                message.textContent =
-                    "Не удалось отправить заявку. Попробуйте ещё раз немного позже.";
+        message.textContent =
+            "Не удалось отправить заявку. " +
+            "Проверьте подключение системы заявок.";
 
 
-                button.disabled = false;
-                button.textContent = "SUBMIT APPLICATION";
+    } finally {
 
-            }
 
-        });
+        button.disabled = false;
+
+        button.textContent =
+            "SUBMIT APPLICATION";
+
+    }
+
+});
 
 </script>
 
