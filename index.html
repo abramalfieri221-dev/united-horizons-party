@@ -119,12 +119,17 @@ button{cursor:pointer}
 }
 .brand{display:flex;align-items:center;gap:13px;min-width:220px}
 .brand-logo{
-  width:44px;height:44px;display:grid;place-items:center;
-  border:1px solid #2c4159;
-  background:linear-gradient(145deg,#112b47,#07111d);
-  box-shadow:inset 0 0 25px rgba(255,255,255,.025);
+  width:52px;height:52px;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(145deg,#102b48,#06101c);
+  box-shadow:inset 0 0 25px rgba(255,255,255,.025),0 8px 30px rgba(0,0,0,.22);
+  overflow:hidden;
 }
-.brand-logo span{font-size:21px}
+.brand-logo svg{width:43px;height:43px;display:block;filter:drop-shadow(0 3px 8px rgba(0,0,0,.35))}
+.brand-logo .logo-red{fill:#c5233d}
+.brand-logo .logo-white{fill:#fff}
+.brand-logo .logo-blue{fill:#173d68}
+.brand-logo .logo-line{fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .brand-title{font-size:12px;font-weight:950;letter-spacing:3px;line-height:1}
 .brand-sub{margin-top:5px;color:var(--red2);font-size:7px;font-weight:900;letter-spacing:4px}
 .nav{display:flex;align-items:center;gap:21px}
@@ -467,6 +472,112 @@ textarea.form-control{min-height:120px;resize:vertical}
   to{transform:translateY(-20vh);opacity:0}
 }
 
+
+.theme-switcher-label{display:none}
+  .theme-btn{width:32px;height:32px}
+  .theme-name{display:none}
+}
+
+
+/* =========================================================
+   UHP FOOTER THEME LAB
+   ========================================================= */
+.uhp-theme-lab{
+  margin:52px 0 0;
+  padding:0 0 34px;
+}
+.uhp-theme-lab-inner{
+  max-width:1180px;
+  margin:0 auto;
+  padding:20px;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  box-shadow:0 18px 60px rgba(0,0,0,.2);
+  position:relative;
+  overflow:hidden;
+}
+.uhp-theme-lab-inner:before{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background:conic-gradient(from 90deg,transparent,rgba(197,35,61,.12),transparent,rgba(44,92,139,.12),transparent);
+  animation:uhpThemeSpin 16s linear infinite;
+  pointer-events:none;
+}
+.uhp-theme-lab-content{position:relative;z-index:1}
+.uhp-theme-lab-head{
+  display:flex;justify-content:space-between;align-items:end;gap:20px;
+  margin-bottom:14px;
+}
+.uhp-theme-kicker{
+  color:#6f8297;font-size:8px;font-weight:950;letter-spacing:2.4px;
+}
+.uhp-theme-title{
+  margin-top:5px;font-size:18px;font-weight:950;letter-spacing:.5px;
+}
+.uhp-theme-current{
+  font-size:8px;font-weight:950;letter-spacing:1.5px;color:var(--red2);
+}
+.uhp-theme-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:8px;
+}
+.uhp-theme-card{
+  position:relative;min-height:76px;padding:10px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#07111d;color:#dce6ef;
+  cursor:pointer;text-align:left;overflow:hidden;
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.uhp-theme-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.25)}
+.uhp-theme-card.active{
+  border-color:var(--red2);
+  box-shadow:0 0 0 1px rgba(197,35,61,.15),0 12px 35px rgba(0,0,0,.25);
+}
+.uhp-theme-preview{
+  height:26px;margin-bottom:8px;
+  background:linear-gradient(100deg,var(--c1),var(--c2),var(--c3),var(--c1));
+  background-size:300% 100%;
+  animation:uhpGradient 5s ease infinite;
+}
+.uhp-theme-card strong{display:block;font-size:8px;letter-spacing:1.2px}
+.uhp-theme-card span{display:block;margin-top:3px;color:#6f8297;font-size:7px}
+@keyframes uhpGradient{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+@keyframes uhpThemeSpin{to{transform:rotate(360deg)}}
+
+body[data-theme="federal"]{
+  --bg:#020812;--bg2:#06162b;--panel:#091b31;--panel2:#102b49;
+  --red:#b21d3b;--red2:#ef3c5b;--blue:#1d4f8a;--blue2:#4e88c7;
+}
+body[data-theme="liberty"]{
+  --bg:#050a07;--bg2:#0d170e;--panel:#101d12;--panel2:#1b2d1a;
+  --red:#729b4a;--red2:#a9d06c;--blue:#315b3a;--blue2:#63915d;
+}
+body[data-theme="executive"]{
+  --bg:#090704;--bg2:#171006;--panel:#1c1409;--panel2:#2d210d;
+  --red:#b27a26;--red2:#e2ac4b;--blue:#58401b;--blue2:#96702d;
+}
+body[data-theme="ocean"]{
+  --bg:#020b10;--bg2:#05202a;--panel:#07303a;--panel2:#0c4551;
+  --red:#17b8c7;--red2:#62e8ef;--blue:#176d8c;--blue2:#36a9c6;
+}
+body[data-theme="federal"] .btn-primary{background:linear-gradient(135deg,#94132f,#ef3c5b)}
+body[data-theme="liberty"] .btn-primary{background:linear-gradient(135deg,#557b39,#a9d06c)}
+body[data-theme="executive"] .btn-primary{background:linear-gradient(135deg,#7e5519,#e2ac4b)}
+body[data-theme="ocean"] .btn-primary{background:linear-gradient(135deg,#0b7183,#62e8ef);color:#031014}
+body[data-theme="liberty"] .glow{background:#729b4a}
+body[data-theme="executive"] .glow{background:#b27a26}
+body[data-theme="ocean"] .glow{background:#17b8c7}
+body[data-theme="ocean"] .glow.blue{background:#176d8c}
+
+@media(max-width:800px){
+  .uhp-theme-grid{grid-template-columns:repeat(3,1fr)}
+  .uhp-theme-lab-head{align-items:start;flex-direction:column;gap:6px}
+}
+@media(max-width:500px){
+  .uhp-theme-grid{grid-template-columns:repeat(2,1fr)}
+  .uhp-theme-lab-inner{padding:14px}
+}
+
 @media(max-width:1000px){
   .nav{display:none}
   .menu-btn{display:block}
@@ -543,6 +654,20 @@ textarea.form-control{min-height:120px;resize:vertical}
 .discord-pulse{position:fixed;right:22px;bottom:22px;z-index:3800;width:52px;height:52px;border-radius:50%;border:1px solid #5865f2;background:#5865f2;color:#fff;display:grid;place-items:center;font-size:22px;box-shadow:0 15px 45px rgba(0,0,0,.45);cursor:pointer;transition:.25s}.discord-pulse:hover{transform:translateY(-3px) scale(1.04)}
 @media(max-width:700px){.ai-launcher{left:14px;bottom:14px}.ai-window{left:14px;bottom:82px}.discord-stack{right:14px;top:84px}.discord-pulse{right:14px;bottom:14px}.discord-notice{padding-right:35px}}
 
+
+
+
+
+
+
+
+.discord-open .discord-logo{
+  width:25px;
+  height:25px;
+  display:block;
+  fill:currentColor;
+}
+
 </style>
 </head>
 
@@ -567,7 +692,13 @@ textarea.form-control{min-height:120px;resize:vertical}
 <header class="header" id="header">
   <div class="header-inner">
     <a class="brand" href="#top">
-      <div class="brand-logo"><span>★</span></div>
+      <div class="brand-logo"><svg viewBox="0 0 100 100" role="img" aria-label="United Horizons Party logo" xmlns="http://www.w3.org/2000/svg">
+  <path class="logo-white" d="M50 8 43 22 30 17 35 31 18 30 34 41 22 49 39 49 31 65 45 57 50 88 55 57 69 65 61 49 78 49 66 41 82 30 65 31 70 17 57 22Z"/>
+  <path class="logo-blue" d="M36 48h28l-3 22-11 12-11-12z"/>
+  <path class="logo-red" d="M42 52h5v20h-5zm8 0h5v23l-5 4zm8 0h5v19l-5 3z"/>
+  <path class="logo-white" d="M50 48c-4-8-3-17 0-22 3 5 4 14 0 22z"/>
+  <circle cx="50" cy="24" r="3.2" class="logo-white"/>
+</svg></div>
       <div>
         <div class="brand-title">UNITED HORIZONS</div>
         <div class="brand-sub">PARTY · ARIZONA ONLINE</div>
@@ -991,12 +1122,52 @@ textarea.form-control{min-height:120px;resize:vertical}
 
 </main>
 
+
+<!-- UHP THEME LAB -->
+<section class="uhp-theme-lab" aria-label="Theme Lab">
+  <div class="uhp-theme-lab-inner">
+    <div class="uhp-theme-lab-content">
+      <div class="uhp-theme-lab-head">
+        <div>
+          <div class="uhp-theme-kicker">UNITED HORIZONS PARTY · EXPERIENCE</div>
+          <div class="uhp-theme-title">Выберите стиль партии</div>
+        </div>
+        <div class="uhp-theme-current" id="uhpThemeCurrent">MIDNIGHT / UHP</div>
+      </div>
+
+      <div class="uhp-theme-grid">
+        <button class="uhp-theme-card active" data-theme="midnight" style="--c1:#071525;--c2:#183f68;--c3:#c5233d">
+          <div class="uhp-theme-preview"></div><strong>MIDNIGHT</strong><span>Original UHP</span>
+        </button>
+        <button class="uhp-theme-card" data-theme="federal" style="--c1:#06162b;--c2:#1d4f8a;--c3:#ef3c5b">
+          <div class="uhp-theme-preview"></div><strong>FEDERAL</strong><span>American Government</span>
+        </button>
+        <button class="uhp-theme-card" data-theme="liberty" style="--c1:#0d170e;--c2:#52774b;--c3:#a9d06c">
+          <div class="uhp-theme-preview"></div><strong>LIBERTY</strong><span>Green Republic</span>
+        </button>
+        <button class="uhp-theme-card" data-theme="executive" style="--c1:#171006;--c2:#80602a;--c3:#e2ac4b">
+          <div class="uhp-theme-preview"></div><strong>EXECUTIVE</strong><span>Presidential Gold</span>
+        </button>
+        <button class="uhp-theme-card" data-theme="ocean" style="--c1:#05202a;--c2:#176d8c;--c3:#62e8ef">
+          <div class="uhp-theme-preview"></div><strong>OCEAN</strong><span>Pacific Future</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
 <div class="container">
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="brand">
-        <div class="brand-logo"><span>★</span></div>
+        <div class="brand-logo"><svg viewBox="0 0 100 100" role="img" aria-label="United Horizons Party logo" xmlns="http://www.w3.org/2000/svg">
+  <path class="logo-white" d="M50 8 43 22 30 17 35 31 18 30 34 41 22 49 39 49 31 65 45 57 50 88 55 57 69 65 61 49 78 49 66 41 82 30 65 31 70 17 57 22Z"/>
+  <path class="logo-blue" d="M36 48h28l-3 22-11 12-11-12z"/>
+  <path class="logo-red" d="M42 52h5v20h-5zm8 0h5v23l-5 4zm8 0h5v19l-5 3z"/>
+  <path class="logo-white" d="M50 48c-4-8-3-17 0-22 3 5 4 14 0 22z"/>
+  <circle cx="50" cy="24" r="3.2" class="logo-white"/>
+</svg></div>
         <div><div class="brand-title">UNITED HORIZONS</div><div class="brand-sub">PARTY</div></div>
       </div>
       <p>Вымышленная политическая партия игрового проекта Arizona Online. Unity Today · Horizons Forever.</p>
@@ -1024,7 +1195,7 @@ textarea.form-control{min-height:120px;resize:vertical}
   </div>
   <div class="footer-bottom">
     <span>© 2026 UNITED HORIZONS PARTY</span>
-    <span>FICTIONAL · ARIZONA ONLINE · NOT REAL WORLD</span>
+    <span>FICTIONAL · ARIZONA ONLINE · NOT REAL WORLD · UHP THEME SYSTEM</span>
   </div>
 </div>
 </footer>
@@ -1280,6 +1451,7 @@ console.log(
 </script>
 
 
+
 <!-- UHP AI ASSISTANT -->
 <button class="ai-launcher" id="aiLauncher" aria-label="Открыть AI помощника">✦<span class="ai-dot"></span></button>
 <div class="ai-window" id="aiWindow" aria-label="AI помощник United Horizons Party">
@@ -1299,7 +1471,7 @@ console.log(
 </div>
 
 <!-- DISCORD NOTIFICATIONS -->
-<div class="discord-stack" id="discordStack"></div>
+
 <button class="discord-pulse" id="discordPulse" title="Discord партии">◉</button>
 
 <script>
@@ -1359,7 +1531,7 @@ $$('.ai-suggest').forEach(b=>b.addEventListener('click',()=>{aiInput.value=b.tex
 discordPulse.addEventListener("click",()=>window.open(DISCORD_URL,"_blank","noopener,noreferrer"));
 function discordNotice(){
   const n=document.createElement("div");n.className="discord-notice";
-  n.innerHTML=`<button class="discord-x" aria-label="Закрыть">×</button><div class="discord-top"><div class="discord-icon">◉</div><div class="discord-title">UNITED HORIZONS · DISCORD</div><div class="discord-online">ONLINE</div></div><p>Присоединяйтесь к официальному Discord партии: новости, обсуждение реформ, мероприятия и связь с командой.</p><div class="discord-actions"><a class="discord-join" href="${DISCORD_URL}" target="_blank" rel="noopener noreferrer">ВСТУПИТЬ В DISCORD →</a><button class="discord-dismiss">Позже</button></div>`;
+  n.innerHTML=`<button class="discord-x" aria-label="Закрыть">×</button></div><p>Присоединяйтесь к официальному Discord партии: новости, обсуждение реформ, мероприятия и связь с командой.</p>`;
   discordStack.appendChild(n);
   const close=()=>{n.classList.add("hide");setTimeout(()=>n.remove(),350)};
   n.querySelector(".discord-x").addEventListener("click",close);n.querySelector(".discord-dismiss").addEventListener("click",close);
@@ -1369,5 +1541,36 @@ setTimeout(discordNotice,5000);
 setInterval(discordNotice,60000);
 
 </script>
+
+
+
+
+<script>
+(function(){
+  const cards = document.querySelectorAll(".uhp-theme-card");
+  const current = document.getElementById("uhpThemeCurrent");
+  const labels = {
+    midnight:"MIDNIGHT / UHP",
+    federal:"FEDERAL / AMERICAN GOVERNMENT",
+    liberty:"LIBERTY / GREEN REPUBLIC",
+    executive:"EXECUTIVE / PRESIDENTIAL GOLD",
+    ocean:"OCEAN / PACIFIC FUTURE"
+  };
+  function setTheme(theme){
+    document.body.dataset.theme = theme === "midnight" ? "" : theme;
+    cards.forEach(c => c.classList.toggle("active", c.dataset.theme === theme));
+    if(current) current.textContent = labels[theme] || labels.midnight;
+    localStorage.setItem("uhp-theme", theme);
+  }
+  cards.forEach(c => c.addEventListener("click", () => setTheme(c.dataset.theme)));
+  setTheme(localStorage.getItem("uhp-theme") || "midnight");
+})();
+</script>
+
+
+
+<a class="ai-open discord-open" href="https://discord.gg/XACERtyYWj" target="_blank" rel="noopener" aria-label="Discord партии" title="Discord партии"><svg viewBox="0 0 24 24" aria-hidden="true" class="discord-logo">
+<path d="M19.54 5.01A16.15 16.15 0 0 0 15.55 3.8a.06.06 0 0 0-.06.03c-.17.3-.36.7-.49 1.01a15.1 15.1 0 0 0-4.99 0c-.14-.32-.33-.71-.5-1.01a.06.06 0 0 0-.06-.03 16.2 16.2 0 0 0-3.99 1.21.05.05 0 0 0-.02.02C2.91 8.58 2.22 12.05 2.56 15.47a.07.07 0 0 0 .03.05 16.3 16.3 0 0 0 4.9 2.42.06.06 0 0 0 .07-.02c.38-.52.72-1.07 1.01-1.65a.06.06 0 0 0-.03-.08 10.5 10.5 0 0 1-1.53-.73.06.06 0 0 1-.01-.1c.1-.07.2-.15.3-.22a.06.06 0 0 1 .06-.01c3.2 1.46 6.67 1.46 9.83 0a.06.06 0 0 1 .06.01c.1.07.2.15.3.22a.06.06 0 0 1-.01.1c-.49.29-1 .53-1.53.73a.06.06 0 0 0-.03.08c.3.58.63 1.13 1.01 1.65a.06.06 0 0 0 .07.02 16.2 16.2 0 0 0 4.91-2.42.06.06 0 0 0 .03-.05c.4-3.96-.67-7.4-2.83-10.44a.05.05 0 0 0-.03-.02ZM8.68 13.33c-.96 0-1.75-.88-1.75-1.96s.78-1.97 1.75-1.97c.98 0 1.76.89 1.75 1.97 0 1.08-.78 1.96-1.75 1.96Zm6.64 0c-.96 0-1.75-.88-1.75-1.96s.78-1.97 1.75-1.97c.98 0 1.76.89 1.75 1.97 0 1.08-.78 1.96-1.75 1.96Z"/>
+</svg></a>
 </body>
 </html>
