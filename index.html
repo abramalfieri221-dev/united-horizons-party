@@ -1273,14 +1273,6 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
       </label>
 
       <div class="form-message" id="deputyFormMessage"></div>
-      
-      <div class="form-group">
-        <label for="joinDiscord">ВАШ DISCORD</label>
-        <input class="form-control" id="joinDiscord" name="discord" type="text"
-               maxlength="100" required placeholder="Например: Alex_Kuznetsov">
-        <small class="form-hint">Укажите ваш Discord для связи с руководством партии.</small>
-      </div>
-
 <button class="submit" id="deputySubmitButton" type="submit">ОТПРАВИТЬ ЗАЯВКУ ДЕПУТАТА</button>
     </form>
   </div>
@@ -1424,6 +1416,13 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
         <textarea class="form-control" id="reason" maxlength="1000" required placeholder="Расскажите о своей мотивации..."></textarea>
       </div>
 
+      <div class="form-group">
+        <label for="joinDiscord">ВАШ DISCORD</label>
+        <input class="form-control" id="joinDiscord" name="discord" type="text"
+               maxlength="100" required placeholder="Например: Alex_Kuznetsov">
+        <small class="form-hint">Укажите ваш Discord для связи с руководством партии.</small>
+      </div>
+
       <div class="form-message" id="formMessage"></div>
       <button class="submit" id="submitButton" type="submit">ОТПРАВИТЬ ЗАЯВКУ</button>
       <div class="form-note">Нажимая кнопку, вы отправляете игровую анкету руководству Российская Партия Развития.</div>
@@ -1561,8 +1560,9 @@ $("#applicationForm").addEventListener("submit",async(event)=>{
   const realAge=$("#realAge").value.trim();
   const characterAge=$("#characterAge").value.trim();
   const reason=$("#reason").value.trim();
+  const discord=$("#joinDiscord").value.trim();
 
-  if(!nickname || !realAge || !characterAge || !reason){
+  if(!nickname || !realAge || !characterAge || !reason || !discord){
     message.className="form-message error";
     message.textContent="Заполните все поля.";
     return;
@@ -1581,7 +1581,8 @@ $("#applicationForm").addEventListener("submit",async(event)=>{
         nickname,
         realAge,
         characterAge,
-        reason
+        reason,
+          discord
       })
     });
 
