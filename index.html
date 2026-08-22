@@ -1273,7 +1273,15 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
       </label>
 
       <div class="form-message" id="deputyFormMessage"></div>
-      <button class="submit" id="deputySubmitButton" type="submit">ОТПРАВИТЬ ЗАЯВКУ ДЕПУТАТА</button>
+      
+      <div class="form-group">
+        <label for="joinDiscord">ВАШ DISCORD</label>
+        <input class="form-control" id="joinDiscord" name="discord" type="text"
+               maxlength="100" required placeholder="Например: Alex_Kuznetsov">
+        <small class="form-hint">Укажите ваш Discord для связи с руководством партии.</small>
+      </div>
+
+<button class="submit" id="deputySubmitButton" type="submit">ОТПРАВИТЬ ЗАЯВКУ ДЕПУТАТА</button>
     </form>
   </div>
 </div>
