@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Админ-панель — Российская Партия Развития</title>
+    <title>Административная панель — Российская Партия Развития</title>
 
     <style>
         * {
@@ -14,16 +14,21 @@
         }
 
         body {
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
             background:
-                radial-gradient(circle at top left, #243b64, transparent 40%),
-                radial-gradient(circle at bottom right, #172238, transparent 40%),
-                #0b1220;
-            color: #fff;
+                linear-gradient(
+                    rgba(245, 247, 250, 0.96),
+                    rgba(245, 247, 250, 0.96)
+                );
+            color: #172033;
+            min-height: 100vh;
         }
 
-        .login-page {
+        /* =========================
+           LOGIN
+        ========================= */
+
+        #loginPage {
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -34,243 +39,385 @@
         .login-card {
             width: 100%;
             max-width: 430px;
+            background: white;
+            border-radius: 22px;
             padding: 40px;
-            border-radius: 24px;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 25px 80px rgba(0,0,0,0.45);
-            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border: 1px solid #e7eaf0;
         }
 
-        .logo {
+        .flag {
             width: 90px;
-            height: 90px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 20px;
+            height: 6px;
+            margin: 0 auto 25px;
+            border-radius: 20px;
+            background: linear-gradient(
+                to bottom,
+                #ffffff 33%,
+                #1d5fa7 33%,
+                #1d5fa7 66%,
+                #d62f2f 66%
+            );
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
 
-        .logo-placeholder {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255,255,255,0.1);
-            font-size: 40px;
-        }
-
-        h1 {
+        .login-logo {
             text-align: center;
-            font-size: 25px;
+            font-size: 46px;
+            margin-bottom: 15px;
+        }
+
+        .login-card h1 {
+            text-align: center;
+            font-size: 24px;
             margin-bottom: 8px;
         }
 
-        .subtitle {
+        .login-card .subtitle {
             text-align: center;
-            color: #aeb8ca;
-            margin-bottom: 30px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #dce3ef;
+            color: #737b8c;
             font-size: 14px;
+            margin-bottom: 30px;
         }
 
         .field {
             margin-bottom: 18px;
         }
 
-        input {
+        .field label {
+            display: block;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .field input {
             width: 100%;
-            padding: 14px 16px;
-            border: 1px solid rgba(255,255,255,0.15);
+            height: 50px;
+            border: 1px solid #d9dee8;
             border-radius: 12px;
-            background: rgba(0,0,0,0.25);
-            color: #fff;
-            outline: none;
+            padding: 0 15px;
             font-size: 15px;
+            outline: none;
+            transition: .2s;
         }
 
-        input:focus {
-            border-color: #6d9cff;
-            box-shadow: 0 0 0 3px rgba(109,156,255,0.12);
+        .field input:focus {
+            border-color: #1d5fa7;
+            box-shadow: 0 0 0 3px rgba(29,95,167,.12);
         }
 
-        button {
+        .login-button {
             width: 100%;
-            border: 0;
+            height: 52px;
+            border: none;
             border-radius: 12px;
-            padding: 14px;
-            background: #315db5;
+            background: #1d5fa7;
             color: white;
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
+            transition: .2s;
         }
 
-        button:hover {
-            transform: translateY(-1px);
-            background: #3d70d3;
+        .login-button:hover {
+            background: #174d88;
         }
 
-        button:disabled {
-            opacity: 0.6;
+        .login-button:disabled {
+            opacity: .6;
             cursor: not-allowed;
         }
 
-        .error {
+        #loginError {
             display: none;
-            margin-top: 16px;
+            background: #fff0f0;
+            border: 1px solid #ffd1d1;
+            color: #c62828;
             padding: 12px;
             border-radius: 10px;
-            background: rgba(220,50,50,0.15);
-            border: 1px solid rgba(220,50,50,0.3);
-            color: #ff9e9e;
+            margin-bottom: 18px;
             font-size: 14px;
+            text-align: center;
         }
 
-        .dashboard {
+        /* =========================
+           ADMIN
+        ========================= */
+
+        #adminPage {
             display: none;
             min-height: 100vh;
         }
 
-        .sidebar {
-            position: fixed;
-            left: 0;
+        .topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e6e9ef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            position: sticky;
             top: 0;
-            bottom: 0;
-            width: 250px;
-            padding: 25px 16px;
-            background: rgba(5,10,20,0.92);
-            border-right: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
         }
 
         .brand {
-            font-weight: 800;
-            font-size: 17px;
-            line-height: 1.3;
-            padding: 10px 12px 25px;
-        }
-
-        .brand span {
-            color: #82a9ff;
-        }
-
-        .nav button {
-            text-align: left;
-            margin-bottom: 7px;
-            background: transparent;
-            color: #bac5d8;
-            font-weight: 500;
-        }
-
-        .nav button:hover,
-        .nav button.active {
-            background: rgba(70,110,190,0.2);
-            color: #fff;
-        }
-
-        .logout {
-            position: absolute;
-            left: 16px;
-            right: 16px;
-            bottom: 20px;
-            background: rgba(200,50,50,0.15) !important;
-            color: #ffaaaa !important;
-        }
-
-        .main {
-            margin-left: 250px;
-            padding: 35px;
-        }
-
-        .topbar {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            gap: 12px;
+            font-weight: 800;
         }
 
-        .topbar h2 {
+        .brand-icon {
             font-size: 28px;
         }
 
-        .admin-name {
-            padding: 10px 15px;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.07);
-            color: #c9d3e5;
+        .brand-text small {
+            display: block;
+            color: #7b8494;
+            font-size: 11px;
+            font-weight: 500;
+            margin-top: 3px;
         }
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+        .user-area {
+            display: flex;
+            align-items: center;
             gap: 15px;
         }
 
-        .card {
+        .username {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .logout-button {
+            border: 1px solid #e0e4eb;
+            background: white;
+            padding: 9px 14px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-button:hover {
+            background: #f4f6f8;
+        }
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 72px);
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #111827;
+            padding: 25px 15px;
+            color: white;
+        }
+
+        .sidebar-title {
+            color: #8f9aad;
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 10px 12px 12px;
+        }
+
+        .menu-button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: #c8d0dc;
+            text-align: left;
+            padding: 13px 14px;
+            border-radius: 9px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .menu-button:hover,
+        .menu-button.active {
+            background: #1d5fa7;
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+            padding: 35px;
+            max-width: 1500px;
+        }
+
+        .page-title {
+            margin-bottom: 8px;
+            font-size: 30px;
+        }
+
+        .page-description {
+            color: #727b8c;
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e7eaf0;
+            border-radius: 16px;
             padding: 22px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,.04);
         }
 
-        .card-title {
-            color: #9ba8bd;
-            font-size: 13px;
-            margin-bottom: 12px;
+        .stat-icon {
+            font-size: 26px;
+            margin-bottom: 14px;
         }
 
-        .card-value {
+        .stat-number {
             font-size: 30px;
             font-weight: 800;
+            margin-bottom: 5px;
         }
 
-        .section {
-            margin-top: 30px;
+        .stat-name {
+            color: #7a8291;
+            font-size: 13px;
+        }
+
+        /* =========================
+           PANELS
+        ========================= */
+
+        .panel {
+            background: white;
+            border: 1px solid #e7eaf0;
+            border-radius: 16px;
             padding: 25px;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,.04);
         }
 
-        .section h3 {
+        .panel h2 {
+            font-size: 19px;
             margin-bottom: 10px;
         }
 
-        @media (max-width: 1000px) {
-            .cards {
+        .panel p {
+            color: #737b8b;
+            line-height: 1.6;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action {
+            border: 1px solid #e2e6ed;
+            background: #fafbfd;
+            padding: 20px;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .action:hover {
+            border-color: #1d5fa7;
+            transform: translateY(-2px);
+        }
+
+        .action strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .action span {
+            font-size: 13px;
+            color: #7a8291;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7b8493;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 1100px) {
+            .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
             .sidebar {
-                position: static;
-                width: 100%;
+                width: 190px;
             }
 
-            .dashboard {
-                display: none;
-            }
-
-            .main {
-                margin-left: 0;
+            .content {
                 padding: 20px;
             }
 
-            .cards {
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .brand-text {
+                display: none;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .content {
+                padding: 18px;
+            }
+
+            .stats {
                 grid-template-columns: 1fr;
             }
 
+            .page-title {
+                font-size: 24px;
+            }
+
             .login-card {
-                padding: 28px 20px;
+                padding: 28px 22px;
+            }
+
+            .username {
+                display: none;
             }
         }
     </style>
@@ -278,460 +425,715 @@
 
 <body>
 
-<!-- =========================
-     ВХОД
-========================= -->
+<!-- =====================================
+     СТРАНИЦА ВХОДА
+===================================== -->
 
-<div class="login-page" id="loginPage">
+<div id="loginPage">
 
     <div class="login-card">
 
-        <div class="logo-placeholder">
+        <div class="flag"></div>
+
+        <div class="login-logo">
             🇷🇺
         </div>
 
-        <!--
-        Когда загрузишь логотип:
-        замени блок выше на:
-
-        <img src="assets/images/logo.png"
-             class="logo"
-             alt="Российская Партия Развития">
-        -->
-
-        <h1>Административная панель</h1>
+        <h1>
+            Административная панель
+        </h1>
 
         <div class="subtitle">
             Российская Партия Развития
         </div>
 
+        <div id="loginError"></div>
+
         <form id="loginForm">
 
             <div class="field">
+
                 <label for="username">
                     Логин администратора
                 </label>
 
                 <input
-                    id="username"
                     type="text"
-                    autocomplete="username"
+                    id="username"
+                    name="username"
                     placeholder="Введите логин"
+                    autocomplete="username"
                     required
                 >
+
             </div>
 
             <div class="field">
+
                 <label for="password">
                     Пароль
                 </label>
 
                 <input
-                    id="password"
                     type="password"
-                    autocomplete="current-password"
+                    id="password"
+                    name="password"
                     placeholder="Введите пароль"
+                    autocomplete="current-password"
                     required
                 >
+
             </div>
 
-            <button id="loginButton" type="submit">
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
                 Войти в систему
             </button>
 
         </form>
-
-        <div class="error" id="loginError"></div>
 
     </div>
 
 </div>
 
 
-<!-- =========================
+<!-- =====================================
      АДМИН-ПАНЕЛЬ
-========================= -->
+===================================== -->
 
-<div class="dashboard" id="dashboard">
+<div id="adminPage">
 
-    <aside class="sidebar">
+    <header class="topbar">
 
         <div class="brand">
-            РОССИЙСКАЯ<br>
-            <span>ПАРТИЯ РАЗВИТИЯ</span>
+
+            <div class="brand-icon">
+                🇷🇺
+            </div>
+
+            <div class="brand-text">
+
+                Российская Партия Развития
+
+                <small>
+                    Административная панель
+                </small>
+
+            </div>
+
         </div>
 
-        <div class="nav">
 
-            <button class="active">
+        <div class="user-area">
+
+            <span
+                class="username"
+                id="adminUsername"
+            >
+                admin
+            </span>
+
+            <button
+                class="logout-button"
+                id="logoutButton"
+            >
+                Выйти
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div class="layout">
+
+
+        <!-- =========================
+             SIDEBAR
+        ========================= -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                Управление
+            </div>
+
+            <button
+                class="menu-button active"
+                data-section="dashboard"
+            >
                 📊 Обзор
             </button>
 
-            <button>
-                🗳️ Голосования
-            </button>
-
-            <button>
+            <button
+                class="menu-button"
+                data-section="appeals"
+            >
                 📩 Обращения граждан
             </button>
 
-            <button>
+            <button
+                class="menu-button"
+                data-section="applications"
+            >
                 👥 Заявки в партию
             </button>
 
-            <button>
+            <button
+                class="menu-button"
+                data-section="news"
+            >
                 📰 Новости
             </button>
 
-            <button>
+            <button
+                class="menu-button"
+                data-section="documents"
+            >
                 📄 Документы
             </button>
 
-        </div>
+            <button
+                class="menu-button"
+                data-section="votes"
+            >
+                🗳️ Голосования
+            </button>
 
-        <button class="logout" id="logoutButton">
-            🚪 Выйти
-        </button>
-
-    </aside>
-
-
-    <main class="main">
-
-        <div class="topbar">
-
-            <h2>
-                Обзор
-            </h2>
-
-            <div class="admin-name" id="adminName">
-                Администратор
-            </div>
-
-        </div>
+        </aside>
 
 
-        <div class="cards">
+        <!-- =========================
+             CONTENT
+        ========================= -->
 
-            <div class="card">
-                <div class="card-title">
-                    Обращения
+        <main class="content">
+
+
+            <!-- DASHBOARD -->
+
+            <section
+                id="dashboard"
+                class="section"
+            >
+
+                <h1 class="page-title">
+                    Панель управления
+                </h1>
+
+                <p class="page-description">
+                    Добро пожаловать в административную систему
+                    Российской Партии Развития.
+                </p>
+
+
+                <div
+                    class="stats"
+                    id="stats"
+                >
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            📩
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="statAppeals"
+                        >
+                            —
+                        </div>
+
+                        <div class="stat-name">
+                            Обращения граждан
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            👥
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="statApplications"
+                        >
+                            —
+                        </div>
+
+                        <div class="stat-name">
+                            Заявки в партию
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            📰
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="statNews"
+                        >
+                            —
+                        </div>
+
+                        <div class="stat-name">
+                            Новости
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            📄
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="statDocuments"
+                        >
+                            —
+                        </div>
+
+                        <div class="stat-name">
+                            Документы
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            🗳️
+                        </div>
+
+                        <div
+                            class="stat-number"
+                            id="statVotes"
+                        >
+                            —
+                        </div>
+
+                        <div class="stat-name">
+                            Голосования
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="card-value" id="appealsCount">
-                    0
+
+                <div class="panel">
+
+                    <h2>
+                        Быстрые действия
+                    </h2>
+
+                    <p>
+                        Выберите раздел для управления
+                        информацией партии.
+                    </p>
+
+
+                    <div class="quick-actions">
+
+                        <div
+                            class="action"
+                            data-open="appeals"
+                        >
+
+                            <strong>
+                                📩 Обращения граждан
+                            </strong>
+
+                            <span>
+                                Просмотр и обработка обращений.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="action"
+                            data-open="news"
+                        >
+
+                            <strong>
+                                📰 Управление новостями
+                            </strong>
+
+                            <span>
+                                Создание и публикация новостей.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="action"
+                            data-open="votes"
+                        >
+
+                            <strong>
+                                🗳️ Голосования
+                            </strong>
+
+                            <span>
+                                Управление партийными голосованиями.
+                            </span>
+
+                        </div>
+
+                    </div>
+
                 </div>
-            </div>
 
 
-            <div class="card">
-                <div class="card-title">
+                <div class="panel">
+
+                    <h2>
+                        Система подключена
+                    </h2>
+
+                    <p>
+                        Административная панель подключена
+                        к Cloudflare Worker и базе данных D1.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- APPEALS -->
+
+            <section
+                id="appeals"
+                class="section hidden"
+            >
+
+                <h1 class="page-title">
+                    Обращения граждан
+                </h1>
+
+                <p class="page-description">
+                    Управление обращениями граждан Российской Партии Развития.
+                </p>
+
+                <div class="panel">
+
+                    <h2>
+                        Раздел обращений
+                    </h2>
+
+                    <p>
+                        Здесь будут отображаться обращения,
+                        поступившие через форму обращения граждан.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- APPLICATIONS -->
+
+            <section
+                id="applications"
+                class="section hidden"
+            >
+
+                <h1 class="page-title">
                     Заявки в партию
+                </h1>
+
+                <p class="page-description">
+                    Заявления граждан о вступлении в партию.
+                </p>
+
+                <div class="panel">
+
+                    <h2>
+                        Заявки
+                    </h2>
+
+                    <p>
+                        Управление заявками будет подключено
+                        к таблице membership_applications.
+                    </p>
+
                 </div>
 
-                <div class="card-value" id="applicationsCount">
-                    0
-                </div>
-            </div>
+            </section>
 
 
-            <div class="card">
-                <div class="card-title">
+            <!-- NEWS -->
+
+            <section
+                id="news"
+                class="section hidden"
+            >
+
+                <h1 class="page-title">
                     Новости
+                </h1>
+
+                <p class="page-description">
+                    Создание и управление новостями партии.
+                </p>
+
+                <div class="panel">
+
+                    <h2>
+                        Управление новостями
+                    </h2>
+
+                    <p>
+                        Здесь будет редактор публикаций
+                        Российской Партии Развития.
+                    </p>
+
                 </div>
 
-                <div class="card-value" id="newsCount">
-                    0
-                </div>
-            </div>
+            </section>
 
 
-            <div class="card">
-                <div class="card-title">
+            <!-- DOCUMENTS -->
+
+            <section
+                id="documents"
+                class="section hidden"
+            >
+
+                <h1 class="page-title">
                     Документы
+                </h1>
+
+                <p class="page-description">
+                    Уставы, приказы, постановления и другие документы партии.
+                </p>
+
+                <div class="panel">
+
+                    <h2>
+                        Архив документов
+                    </h2>
+
+                    <p>
+                        Здесь будет управление документами партии.
+                    </p>
+
                 </div>
 
-                <div class="card-value" id="documentsCount">
-                    0
-                </div>
-            </div>
+            </section>
 
 
-            <div class="card">
-                <div class="card-title">
+            <!-- VOTES -->
+
+            <section
+                id="votes"
+                class="section hidden"
+            >
+
+                <h1 class="page-title">
                     Голосования
+                </h1>
+
+                <p class="page-description">
+                    Создание и управление партийными голосованиями.
+                </p>
+
+                <div class="panel">
+
+                    <h2>
+                        Управление голосованиями
+                    </h2>
+
+                    <p>
+                        Здесь будет создание голосований,
+                        вариантов ответа и просмотр результатов.
+                    </p>
+
                 </div>
 
-                <div class="card-value" id="votesCount">
-                    0
-                </div>
-            </div>
-
-        </div>
+            </section>
 
 
-        <div class="section">
+        </main>
 
-            <h3>
-                Добро пожаловать
-            </h3>
-
-            <p>
-                Вы вошли в административную систему
-                Российской Партии Развития.
-            </p>
-
-        </div>
-
-    </main>
+    </div>
 
 </div>
 
 
 <script>
 
-    // =========================================
-    // АДРЕС CLOUDFLARE WORKER
-    // =========================================
+/* =====================================
+   НАСТРОЙКИ
+===================================== */
 
-    const API_URL =
-        "https://quiet-paper-0314.hdkr6795.workers.dev";
+const API_URL =
+    "https://quiet-paper-0314.hdkr6795.workers.dev";
 
-
-    // =========================================
-    // ЭЛЕМЕНТЫ
-    // =========================================
-
-    const loginPage =
-        document.getElementById("loginPage");
-
-    const dashboard =
-        document.getElementById("dashboard");
-
-    const loginForm =
-        document.getElementById("loginForm");
-
-    const loginButton =
-        document.getElementById("loginButton");
-
-    const loginError =
-        document.getElementById("loginError");
-
-    const adminName =
-        document.getElementById("adminName");
+const TOKEN_KEY =
+    "rpr_admin_token";
 
 
-    // =========================================
-    // ПОКАЗ ОШИБКИ
-    // =========================================
+/* =====================================
+   ЭЛЕМЕНТЫ
+===================================== */
 
-    function showError(message) {
+const loginPage =
+    document.getElementById(
+        "loginPage"
+    );
 
-        loginError.textContent =
-            message;
+const adminPage =
+    document.getElementById(
+        "adminPage"
+    );
 
-        loginError.style.display =
-            "block";
-    }
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
 
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
 
-    // =========================================
-    // ВХОД
-    // =========================================
+const loginError =
+    document.getElementById(
+        "loginError"
+    );
 
-    loginForm.addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-            loginError.style.display =
-                "none";
-
-            loginButton.disabled =
-                true;
-
-            loginButton.textContent =
-                "Проверка...";
-
-
-            const username =
-                document.getElementById(
-                    "username"
-                ).value.trim();
-
-
-            const password =
-                document.getElementById(
-                    "password"
-                ).value;
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        API_URL +
-                        "/api/admin/login",
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify({
-                                    username,
-                                    password
-                                })
-                        }
-                    );
-
-
-                const data =
-                    await response.json();
-
-
-                if (!response.ok ||
-                    !data.success) {
-
-                    showError(
-                        data.error ||
-                        "Не удалось выполнить вход"
-                    );
-
-                    return;
-                }
-
-
-                // Сохраняем токен
-                sessionStorage.setItem(
-                    "admin_token",
-                    data.token
-                );
-
-
-                adminName.textContent =
-                    data.admin.username;
-
-
-                loginPage.style.display =
-                    "none";
-
-                dashboard.style.display =
-                    "block";
-
-
-                await loadStatistics();
-
-            } catch (error) {
-
-                console.error(error);
-
-                showError(
-                    "Не удалось подключиться к серверу"
-                );
-
-            } finally {
-
-                loginButton.disabled =
-                    false;
-
-                loginButton.textContent =
-                    "Войти в систему";
-            }
-
-        }
+const adminUsername =
+    document.getElementById(
+        "adminUsername"
     );
 
 
-    // =========================================
-    // ПРОВЕРКА СОХРАНЁННОЙ СЕССИИ
-    // =========================================
+/* =====================================
+   ПОКАЗ ОШИБКИ
+===================================== */
 
-    async function checkSession() {
+function showLoginError(
+    message
+) {
 
-        const token =
-            sessionStorage.getItem(
-                "admin_token"
-            );
+    loginError.textContent =
+        message;
 
+    loginError.style.display =
+        "block";
 
-        if (!token) {
-            return;
-        }
-
-
-        try {
-
-            const response =
-                await fetch(
-                    API_URL +
-                    "/api/admin/me",
-                    {
-                        headers: {
-                            "Authorization":
-                                "Bearer " +
-                                token
-                        }
-                    }
-                );
+}
 
 
-            const data =
-                await response.json();
+/* =====================================
+   СКРЫТЬ ОШИБКУ
+===================================== */
+
+function hideLoginError() {
+
+    loginError.style.display =
+        "none";
+
+}
 
 
-            if (
-                response.ok &&
-                data.success
-            ) {
+/* =====================================
+   ПОКАЗ АДМИНКИ
+===================================== */
 
-                adminName.textContent =
-                    data.admin.username;
+function showAdmin(
+    admin
+) {
+
+    loginPage.style.display =
+        "none";
+
+    adminPage.style.display =
+        "block";
 
 
-                loginPage.style.display =
-                    "none";
+    if (admin) {
 
-                dashboard.style.display =
-                    "block";
+        adminUsername.textContent =
+            admin.username || "admin";
 
-
-                await loadStatistics();
-
-            } else {
-
-                sessionStorage.removeItem(
-                    "admin_token"
-                );
-
-            }
-
-        } catch (error) {
-
-            console.error(error);
-        }
     }
 
 
-    // =========================================
-    // СТАТИСТИКА
-    // =========================================
+    loadStatistics();
 
-    async function loadStatistics() {
-
-        const token =
-            sessionStorage.getItem(
-                "admin_token"
-            );
+}
 
 
-        if (!token) {
-            return;
-        }
+/* =====================================
+   ПОКАЗ LOGIN
+===================================== */
+
+function showLogin() {
+
+    adminPage.style.display =
+        "none";
+
+    loginPage.style.display =
+        "flex";
+
+}
+
+
+/* =====================================
+   ВХОД
+===================================== */
+
+loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+        hideLoginError();
+
+        loginButton.disabled =
+            true;
+
+        loginButton.textContent =
+            "Проверка...";
+
+
+        const username =
+            document
+                .getElementById(
+                    "username"
+                )
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById(
+                    "password"
+                )
+                .value;
 
 
         try {
@@ -739,13 +1141,23 @@
             const response =
                 await fetch(
                     API_URL +
-                    "/api/admin/statistics",
+                    "/api/admin/login",
                     {
+
+                        method:
+                            "POST",
+
                         headers: {
-                            "Authorization":
-                                "Bearer " +
-                                token
-                        }
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                username,
+                                password
+                            })
+
                     }
                 );
 
@@ -758,64 +1170,244 @@
                 !response.ok ||
                 !data.success
             ) {
+
+                showLoginError(
+                    data.error ||
+                    "Неверный логин или пароль"
+                );
+
                 return;
+
             }
 
 
-            const stats =
-                data.statistics;
+            localStorage.setItem(
+                TOKEN_KEY,
+                data.token
+            );
 
 
-            document.getElementById(
-                "appealsCount"
-            ).textContent =
-                stats.appeals;
-
-
-            document.getElementById(
-                "applicationsCount"
-            ).textContent =
-                stats.applications;
-
-
-            document.getElementById(
-                "newsCount"
-            ).textContent =
-                stats.news;
-
-
-            document.getElementById(
-                "documentsCount"
-            ).textContent =
-                stats.documents;
-
-
-            document.getElementById(
-                "votesCount"
-            ).textContent =
-                stats.votes;
+            showAdmin(
+                data.admin
+            );
 
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                error
+            );
+
+            showLoginError(
+                "Не удалось подключиться к серверу."
+            );
+
+        } finally {
+
+            loginButton.disabled =
+                false;
+
+            loginButton.textContent =
+                "Войти в систему";
+
         }
+
+    }
+);
+
+
+/* =====================================
+   ПРОВЕРКА СУЩЕСТВУЮЩЕЙ СЕССИИ
+===================================== */
+
+async function checkSession() {
+
+    const token =
+        localStorage.getItem(
+            TOKEN_KEY
+        );
+
+
+    if (!token) {
+
+        showLogin();
+
+        return;
+
     }
 
 
-    // =========================================
-    // ВЫХОД
-    // =========================================
+    try {
 
-    document.getElementById(
+        const response =
+            await fetch(
+                API_URL +
+                "/api/admin/me",
+                {
+
+                    method:
+                        "GET",
+
+                    headers: {
+                        "Authorization":
+                            "Bearer " +
+                            token
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            response.ok &&
+            data.success
+        ) {
+
+            showAdmin(
+                data.admin
+            );
+
+        } else {
+
+            localStorage.removeItem(
+                TOKEN_KEY
+            );
+
+            showLogin();
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+        showLogin();
+
+    }
+
+}
+
+
+/* =====================================
+   СТАТИСТИКА
+===================================== */
+
+async function loadStatistics() {
+
+    const token =
+        localStorage.getItem(
+            TOKEN_KEY
+        );
+
+
+    if (!token) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "/api/admin/statistics",
+                {
+
+                    method:
+                        "GET",
+
+                    headers: {
+                        "Authorization":
+                            "Bearer " +
+                            token
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok ||
+            !data.success
+        ) {
+
+            return;
+
+        }
+
+
+        const statistics =
+            data.statistics || {};
+
+
+        document.getElementById(
+            "statAppeals"
+        ).textContent =
+            statistics.appeals ?? 0;
+
+
+        document.getElementById(
+            "statApplications"
+        ).textContent =
+            statistics.applications ?? 0;
+
+
+        document.getElementById(
+            "statNews"
+        ).textContent =
+            statistics.news ?? 0;
+
+
+        document.getElementById(
+            "statDocuments"
+        ).textContent =
+            statistics.documents ?? 0;
+
+
+        document.getElementById(
+            "statVotes"
+        ).textContent =
+            statistics.votes ?? 0;
+
+
+    } catch (error) {
+
+        console.error(
+            "Statistics error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   ВЫХОД
+===================================== */
+
+document
+    .getElementById(
         "logoutButton"
-    ).addEventListener(
+    )
+    .addEventListener(
         "click",
         async function() {
 
             const token =
-                sessionStorage.getItem(
-                    "admin_token"
+                localStorage.getItem(
+                    TOKEN_KEY
                 );
 
 
@@ -827,43 +1419,150 @@
                         API_URL +
                         "/api/admin/logout",
                         {
-                            method: "POST",
+
+                            method:
+                                "POST",
 
                             headers: {
                                 "Authorization":
                                     "Bearer " +
                                     token
                             }
+
                         }
                     );
+
                 }
 
             } catch (error) {
 
-                console.error(error);
-
-            } finally {
-
-                sessionStorage.removeItem(
-                    "admin_token"
+                console.error(
+                    error
                 );
 
-                dashboard.style.display =
-                    "none";
-
-                loginPage.style.display =
-                    "flex";
             }
+
+
+            localStorage.removeItem(
+                TOKEN_KEY
+            );
+
+
+            showLogin();
 
         }
     );
 
 
-    // =========================================
-    // ЗАПУСК
-    // =========================================
+/* =====================================
+   ПЕРЕКЛЮЧЕНИЕ РАЗДЕЛОВ
+===================================== */
 
-    checkSession();
+const menuButtons =
+    document.querySelectorAll(
+        ".menu-button"
+    );
+
+const sections =
+    document.querySelectorAll(
+        ".section"
+    );
+
+
+function openSection(
+    sectionName
+) {
+
+    sections.forEach(
+        section => {
+
+            section.classList.add(
+                "hidden"
+            );
+
+        }
+    );
+
+
+    const target =
+        document.getElementById(
+            sectionName
+        );
+
+
+    if (target) {
+
+        target.classList.remove(
+            "hidden"
+        );
+
+    }
+
+
+    menuButtons.forEach(
+        button => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.section ===
+                sectionName
+            );
+
+        }
+    );
+
+}
+
+
+menuButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                openSection(
+                    this.dataset.section
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================
+   БЫСТРЫЕ КНОПКИ
+===================================== */
+
+document
+    .querySelectorAll(
+        "[data-open]"
+    )
+    .forEach(
+        element => {
+
+            element.addEventListener(
+                "click",
+                function() {
+
+                    openSection(
+                        this.dataset.open
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================
+   ЗАПУСК
+===================================== */
+
+checkSession();
 
 </script>
 
