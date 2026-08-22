@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Админ-панель — Российская Партия Развития</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, #243b64, transparent 40%),
+                radial-gradient(circle at bottom right, #172238, transparent 40%),
+                #0b1220;
+            color: #fff;
+        }
+
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 430px;
+            padding: 40px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.45);
+            backdrop-filter: blur(20px);
+        }
+
+        .logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .logo-placeholder {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            font-size: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aeb8ca;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #dce3ef;
+            font-size: 14px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            background: rgba(0,0,0,0.25);
+            color: #fff;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #6d9cff;
+            box-shadow: 0 0 0 3px rgba(109,156,255,0.12);
+        }
+
+        button {
+            width: 100%;
+            border: 0;
+            border-radius: 12px;
+            padding: 14px;
+            background: #315db5;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            background: #3d70d3;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .error {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(220,50,50,0.15);
+            border: 1px solid rgba(220,50,50,0.3);
+            color: #ff9e9e;
+            font-size: 14px;
+        }
+
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 250px;
+            padding: 25px 16px;
+            background: rgba(5,10,20,0.92);
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 17px;
+            line-height: 1.3;
+            padding: 10px 12px 25px;
+        }
+
+        .brand span {
+            color: #82a9ff;
+        }
+
+        .nav button {
+            text-align: left;
+            margin-bottom: 7px;
+            background: transparent;
+            color: #bac5d8;
+            font-weight: 500;
+        }
+
+        .nav button:hover,
+        .nav button.active {
+            background: rgba(70,110,190,0.2);
+            color: #fff;
+        }
+
+        .logout {
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 20px;
+            background: rgba(200,50,50,0.15) !important;
+            color: #ffaaaa !important;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topbar h2 {
+            font-size: 28px;
+        }
+
+        .admin-name {
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.07);
+            color: #c9d3e5;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            padding: 22px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .card-title {
+            color: #9ba8bd;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .section {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section h3 {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 1000px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+            }
+
+            .dashboard {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .login-card {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     ВХОД
+========================= -->
+
+<div class="login-page" id="loginPage">
+
+    <div class="login-card">
+
+        <div class="logo-placeholder">
+            🇷🇺
+        </div>
+
+        <!--
+        Когда загрузишь логотип:
+        замени блок выше на:
+
+        <img src="assets/images/logo.png"
+             class="logo"
+             alt="Российская Партия Развития">
+        -->
+
+        <h1>Административная панель</h1>
+
+        <div class="subtitle">
+            Российская Партия Развития
+        </div>
+
+        <form id="loginForm">
+
+            <div class="field">
+                <label for="username">
+                    Логин администратора
+                </label>
+
+                <input
+                    id="username"
+                    type="text"
+                    autocomplete="username"
+                    placeholder="Введите логин"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="password">
+                    Пароль
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="Введите пароль"
+                    required
+                >
+            </div>
+
+            <button id="loginButton" type="submit">
+                Войти в систему
+            </button>
+
+        </form>
+
+        <div class="error" id="loginError"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     АДМИН-ПАНЕЛЬ
+========================= -->
+
+<div class="dashboard" id="dashboard">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            РОССИЙСКАЯ<br>
+            <span>ПАРТИЯ РАЗВИТИЯ</span>
+        </div>
+
+        <div class="nav">
+
+            <button class="active">
+                📊 Обзор
+            </button>
+
+            <button>
+                🗳️ Голосования
+            </button>
+
+            <button>
+                📩 Обращения граждан
+            </button>
+
+            <button>
+                👥 Заявки в партию
+            </button>
+
+            <button>
+                📰 Новости
+            </button>
+
+            <button>
+                📄 Документы
+            </button>
+
+        </div>
+
+        <button class="logout" id="logoutButton">
+            🚪 Выйти
+        </button>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <h2>
+                Обзор
+            </h2>
+
+            <div class="admin-name" id="adminName">
+                Администратор
+            </div>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-title">
+                    Обращения
+                </div>
+
+                <div class="card-value" id="appealsCount">
+                    0
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-title">
+                    Заявки в партию
+                </div>
+
+                <div class="card-value" id="applicationsCount">
+                    0
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-title">
+                    Новости
+                </div>
+
+                <div class="card-value" id="newsCount">
+                    0
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-title">
+                    Документы
+                </div>
+
+                <div class="card-value" id="documentsCount">
+                    0
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-title">
+                    Голосования
+                </div>
+
+                <div class="card-value" id="votesCount">
+                    0
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h3>
+                Добро пожаловать
+            </h3>
+
+            <p>
+                Вы вошли в административную систему
+                Российской Партии Развития.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    // =========================================
+    // АДРЕС CLOUDFLARE WORKER
+    // =========================================
+
+    const API_URL =
+        "https://quiet-paper-0314.hdkr6795.workers.dev";
+
+
+    // =========================================
+    // ЭЛЕМЕНТЫ
+    // =========================================
+
+    const loginPage =
+        document.getElementById("loginPage");
+
+    const dashboard =
+        document.getElementById("dashboard");
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const loginError =
+        document.getElementById("loginError");
+
+    const adminName =
+        document.getElementById("adminName");
+
+
+    // =========================================
+    // ПОКАЗ ОШИБКИ
+    // =========================================
+
+    function showError(message) {
+
+        loginError.textContent =
+            message;
+
+        loginError.style.display =
+            "block";
+    }
+
+
+    // =========================================
+    // ВХОД
+    // =========================================
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            loginError.style.display =
+                "none";
+
+            loginButton.disabled =
+                true;
+
+            loginButton.textContent =
+                "Проверка...";
+
+
+            const username =
+                document.getElementById(
+                    "username"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "password"
+                ).value;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        API_URL +
+                        "/api/admin/login",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    username,
+                                    password
+                                })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok ||
+                    !data.success) {
+
+                    showError(
+                        data.error ||
+                        "Не удалось выполнить вход"
+                    );
+
+                    return;
+                }
+
+
+                // Сохраняем токен
+                sessionStorage.setItem(
+                    "admin_token",
+                    data.token
+                );
+
+
+                adminName.textContent =
+                    data.admin.username;
+
+
+                loginPage.style.display =
+                    "none";
+
+                dashboard.style.display =
+                    "block";
+
+
+                await loadStatistics();
+
+            } catch (error) {
+
+                console.error(error);
+
+                showError(
+                    "Не удалось подключиться к серверу"
+                );
+
+            } finally {
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.textContent =
+                    "Войти в систему";
+            }
+
+        }
+    );
+
+
+    // =========================================
+    // ПРОВЕРКА СОХРАНЁННОЙ СЕССИИ
+    // =========================================
+
+    async function checkSession() {
+
+        const token =
+            sessionStorage.getItem(
+                "admin_token"
+            );
+
+
+        if (!token) {
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/api/admin/me",
+                    {
+                        headers: {
+                            "Authorization":
+                                "Bearer " +
+                                token
+                        }
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                response.ok &&
+                data.success
+            ) {
+
+                adminName.textContent =
+                    data.admin.username;
+
+
+                loginPage.style.display =
+                    "none";
+
+                dashboard.style.display =
+                    "block";
+
+
+                await loadStatistics();
+
+            } else {
+
+                sessionStorage.removeItem(
+                    "admin_token"
+                );
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+        }
+    }
+
+
+    // =========================================
+    // СТАТИСТИКА
+    // =========================================
+
+    async function loadStatistics() {
+
+        const token =
+            sessionStorage.getItem(
+                "admin_token"
+            );
+
+
+        if (!token) {
+            return;
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "/api/admin/statistics",
+                    {
+                        headers: {
+                            "Authorization":
+                                "Bearer " +
+                                token
+                        }
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+                return;
+            }
+
+
+            const stats =
+                data.statistics;
+
+
+            document.getElementById(
+                "appealsCount"
+            ).textContent =
+                stats.appeals;
+
+
+            document.getElementById(
+                "applicationsCount"
+            ).textContent =
+                stats.applications;
+
+
+            document.getElementById(
+                "newsCount"
+            ).textContent =
+                stats.news;
+
+
+            document.getElementById(
+                "documentsCount"
+            ).textContent =
+                stats.documents;
+
+
+            document.getElementById(
+                "votesCount"
+            ).textContent =
+                stats.votes;
+
+
+        } catch (error) {
+
+            console.error(error);
+        }
+    }
+
+
+    // =========================================
+    // ВЫХОД
+    // =========================================
+
+    document.getElementById(
+        "logoutButton"
+    ).addEventListener(
+        "click",
+        async function() {
+
+            const token =
+                sessionStorage.getItem(
+                    "admin_token"
+                );
+
+
+            try {
+
+                if (token) {
+
+                    await fetch(
+                        API_URL +
+                        "/api/admin/logout",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Authorization":
+                                    "Bearer " +
+                                    token
+                            }
+                        }
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+            } finally {
+
+                sessionStorage.removeItem(
+                    "admin_token"
+                );
+
+                dashboard.style.display =
+                    "none";
+
+                loginPage.style.display =
+                    "flex";
+            }
+
+        }
+    );
+
+
+    // =========================================
+    // ЗАПУСК
+    // =========================================
+
+    checkSession();
+
+</script>
+
+</body>
+</html>
