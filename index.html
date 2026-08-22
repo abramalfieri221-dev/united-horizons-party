@@ -668,6 +668,46 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
   fill:currentColor;
 }
 
+
+/* =========================================================
+   ОТДЕЛЬНАЯ ЗАЯВКА КАНДИДАТА В ДЕПУТАТЫ
+   ========================================================= */
+.form-step-title{
+  margin:28px 0 14px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.08);
+  font-size:13px;
+  letter-spacing:.14em;
+  font-weight:800;
+}
+.form-check{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin:18px 0;
+  font-size:13px;
+  line-height:1.5;
+  cursor:pointer;
+}
+.form-check input{
+  margin-top:3px;
+  width:16px;
+  height:16px;
+  accent-color:#b51f2a;
+}
+#deputyApplicationModal .modal-content{
+  max-width:760px;
+  max-height:88vh;
+  overflow:auto;
+}
+#deputyApplicationModal .form-control{
+  resize:vertical;
+  min-height:52px;
+}
+#deputyApplicationModal textarea.form-control{
+  min-height:120px;
+}
+
 </style>
 </head>
 
@@ -712,7 +752,8 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
       <a href="#program">ПРОГРАММА</a>
       <a href="#charter">УСТАВ</a>
       <a href="#members">СОСТАВ</a>
-      <a href="#join">ВСТУПИТЬ</a>
+      <a href="#deputy-application">Заявка депутата</a>
+        <a href="#join">ВСТУПИТЬ</a>
     </nav>
 
     <button class="menu-btn" id="menuBtn" aria-label="Меню">☰</button>
@@ -1025,7 +1066,7 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
       <tbody>
         <tr><td>01</td><td>Алексей Кузнецов</td><td>Председатель</td><td class="signature">А. Кузнецов</td></tr>
         <tr><td>02</td><td>Скоро</td><td>Заместитель председателя</td><td class="signature">Скоро</td></tr>
-        <tr><td>03</td><td>Алексей Кузнецов</td><td>Кандидат на пост губернатора</td><td class="signature">А. Кузнецо</td></tr>
+        <tr><td>03</td><td></td>Алексей Кузнецов</td><td>Кандидат на пост губернатора</td><td class="signature">А. Кузнецов</td></tr>
         <tr><td>04</td><td>Тигран Кречет</td><td>Депутат</td><td class="signature">Т.Кречет</td></tr>
         <tr><td>05</td><td>Скоро</td><td>Член партии</td><td class="signature">Скоро</td></tr>
          <tr><td>06</td><td>Скоро</td><td>Член партии</td><td class="signature">Скоро</td></tr>
@@ -1092,6 +1133,110 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
 </div>
 </section>
 
+
+<section id="deputy-application" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="kicker">РОССИЙСКАЯ ПАРТИЯ РАЗВИТИЯ</div>
+        <h2 class="title">Заявка<br><span>кандидата в депутаты.</span></h2>
+        <p class="desc">
+          Отдельная форма для кандидатов на депутатскую должность.
+          Заявка отправляется непосредственно в Discord через вебхук.
+        </p>
+      </div>
+    </div>
+
+    <div class="join-card reveal">
+      <h3>Кандидат в депутаты</h3>
+      <p>Заполните анкету кандидата. Заявка не заменяет обычную заявку на вступление в партию.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" id="openDeputyApply">ПОДАТЬ ЗАЯВКУ ДЕПУТАТА →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal" id="deputyApplicationModal">
+  <div class="modal-content">
+    <button class="modal-close" id="closeDeputyModal">×</button>
+    <div class="kicker">РОССИЙСКАЯ ПАРТИЯ РАЗВИТИЯ</div>
+    <h2 class="modal-title">ЗАЯВКА <span>ДЕПУТАТА.</span></h2>
+    <p class="desc">Заполните все поля. Заявка будет отправлена в Discord на рассмотрение.</p>
+
+    <form class="form" id="deputyApplicationForm">
+
+      <h3 class="form-step-title">01 · ДАННЫЕ КАНДИДАТА</h3>
+
+      <div class="form-group">
+        <label for="deputyNickname">ИГРОВОЙ НИКНЕЙМ</label>
+        <input class="form-control" id="deputyNickname" maxlength="40" required placeholder="Например: Alex_Kuznetsov">
+      </div>
+
+      <div class="form-group">
+        <label for="deputyRealAge">РЕАЛЬНЫЙ ВОЗРАСТ</label>
+        <input class="form-control" id="deputyRealAge" type="number" min="1" max="100" required placeholder="18">
+      </div>
+
+      <div class="form-group">
+        <label for="deputyCharacterAge">ВОЗРАСТ ПЕРСОНАЖА</label>
+        <input class="form-control" id="deputyCharacterAge" type="number" min="1" max="150" required placeholder="35">
+      </div>
+
+      <div class="form-group">
+        <label for="deputyDiscord">DISCORD</label>
+        <input class="form-control" id="deputyDiscord" maxlength="100" required placeholder="username">
+      </div>
+
+      <h3 class="form-step-title">02 · ПОЛИТИЧЕСКАЯ ПОЗИЦИЯ</h3>
+
+      <div class="form-group">
+        <label for="deputyMotivation">ПОЧЕМУ ВЫ ХОТИТЕ СТАТЬ ДЕПУТАТОМ?</label>
+        <textarea class="form-control" id="deputyMotivation" maxlength="2000" required placeholder="Расскажите о своей мотивации..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="deputyPartyReason">ПОЧЕМУ ВЫБРАЛИ РОССИЙСКУЮ ПАРТИЮ РАЗВИТИЯ?</label>
+        <textarea class="form-control" id="deputyPartyReason" maxlength="2000" required placeholder="Почему хотите представлять РПР?"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="deputyProblems">КАКИЕ ПРОБЛЕМЫ ПРОЕКТА СЧИТАЕТЕ ГЛАВНЫМИ?</label>
+        <textarea class="form-control" id="deputyProblems" maxlength="2000" required placeholder="Укажите основные проблемы..."></textarea>
+      </div>
+
+      <h3 class="form-step-title">03 · ПРОГРАММА КАНДИДАТА</h3>
+
+      <div class="form-group">
+        <label for="deputyInitiative1">ИНИЦИАТИВА №1</label>
+        <textarea class="form-control" id="deputyInitiative1" maxlength="2000" required placeholder="Название, проблема, решение и результат..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="deputyInitiative2">ИНИЦИАТИВА №2</label>
+        <textarea class="form-control" id="deputyInitiative2" maxlength="2000" required placeholder="Название, проблема, решение и результат..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="deputyInitiative3">ИНИЦИАТИВА №3</label>
+        <textarea class="form-control" id="deputyInitiative3" maxlength="2000" required placeholder="Название, проблема, решение и результат..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="deputyReaction">ЧТО БУДЕТЕ ДЕЛАТЬ, ЕСЛИ ВАШ ЗАКОНОПРОЕКТ НЕ ПОДДЕРЖАТ?</label>
+        <textarea class="form-control" id="deputyReaction" maxlength="2000" required placeholder="Опишите свои действия..."></textarea>
+      </div>
+
+      <label class="form-check">
+        <input type="checkbox" id="deputyAgreement" required>
+        <span>Я подтверждаю достоверность данных и обязуюсь соблюдать правила Российской Партии Развития и проекта.</span>
+      </label>
+
+      <div class="form-message" id="deputyFormMessage"></div>
+      <button class="submit" id="deputySubmitButton" type="submit">ОТПРАВИТЬ ЗАЯВКУ ДЕПУТАТА</button>
+    </form>
+  </div>
+</div>
 <section class="section" id="join">
 <div class="container">
   <div class="join reveal">
@@ -1450,6 +1595,118 @@ console.log(
 console.log(
   "Fictional political organization for игрового RP-проекта."
 );
+
+// =========================================================
+// ОТДЕЛЬНАЯ ФОРМА КАНДИДАТА В ДЕПУТАТЫ
+// =========================================================
+const DEPUTY_WEBHOOK_URL = 'https://discord.com/api/webhooks/1540768122754170925/Zqcq3pWPvahiY93V6JrF46HLmOVc1M_GX7xwC5AK1cnQ4gpv2dhPZKz9ke_gieQOxykP';
+
+const deputyModal = document.querySelector("#deputyApplicationModal");
+const openDeputyApply = document.querySelector("#openDeputyApply");
+const closeDeputyModal = document.querySelector("#closeDeputyModal");
+
+if(openDeputyApply && deputyModal){
+  openDeputyApply.addEventListener("click",()=>{
+    deputyModal.classList.add("active");
+    document.body.classList.add("modal-open");
+    setTimeout(()=>document.querySelector("#deputyNickname")?.focus(),250);
+  });
+}
+
+if(closeDeputyModal && deputyModal){
+  closeDeputyModal.addEventListener("click",()=>{
+    deputyModal.classList.remove("active");
+    document.body.classList.remove("modal-open");
+  });
+  deputyModal.addEventListener("click",(e)=>{
+    if(e.target===deputyModal){
+      deputyModal.classList.remove("active");
+      document.body.classList.remove("modal-open");
+    }
+  });
+}
+
+document.querySelector("#deputyApplicationForm")?.addEventListener("submit",async(e)=>{
+  e.preventDefault();
+
+  const button=document.querySelector("#deputySubmitButton");
+  const message=document.querySelector("#deputyFormMessage");
+
+  const nickname=document.querySelector("#deputyNickname").value.trim();
+  const realAge=document.querySelector("#deputyRealAge").value.trim();
+  const characterAge=document.querySelector("#deputyCharacterAge").value.trim();
+  const discord=document.querySelector("#deputyDiscord").value.trim();
+  const motivation=document.querySelector("#deputyMotivation").value.trim();
+  const partyReason=document.querySelector("#deputyPartyReason").value.trim();
+  const problems=document.querySelector("#deputyProblems").value.trim();
+  const initiative1=document.querySelector("#deputyInitiative1").value.trim();
+  const initiative2=document.querySelector("#deputyInitiative2").value.trim();
+  const initiative3=document.querySelector("#deputyInitiative3").value.trim();
+  const reaction=document.querySelector("#deputyReaction").value.trim();
+  const agreement=document.querySelector("#deputyAgreement").checked;
+
+  if(!nickname||!realAge||!characterAge||!discord||!motivation||!partyReason||
+     !problems||!initiative1||!initiative2||!initiative3||!reaction||!agreement){
+    message.className="form-message error";
+    message.textContent="Заполните все обязательные поля и подтвердите согласие.";
+    return;
+  }
+
+  button.disabled=true;
+  button.textContent="ОТПРАВКА...";
+  message.className="form-message";
+  message.textContent="";
+
+  const embed={
+    title:"🇷🇺 Новая заявка кандидата в депутаты",
+    description:"Российская Партия Развития • отдельная заявка кандидата",
+    color:15158332,
+    fields:[
+      {name:"👤 Игровой NickName",value:nickname,inline:false},
+      {name:"🎂 Реальный возраст",value:String(realAge),inline:true},
+      {name:"🧑 Возраст персонажа",value:String(characterAge),inline:true},
+      {name:"💬 Discord",value:discord,inline:false},
+      {name:"🏛️ Почему хочет стать депутатом",value:motivation.slice(0,1024),inline:false},
+      {name:"🇷🇺 Почему именно РПР",value:partyReason.slice(0,1024),inline:false},
+      {name:"📌 Главные проблемы проекта",value:problems.slice(0,1024),inline:false},
+      {name:"📜 Инициатива №1",value:initiative1.slice(0,1024),inline:false},
+      {name:"📜 Инициатива №2",value:initiative2.slice(0,1024),inline:false},
+      {name:"📜 Инициатива №3",value:initiative3.slice(0,1024),inline:false},
+      {name:"⚖️ Если законопроект не поддержат",value:reaction.slice(0,1024),inline:false}
+    ],
+    footer:{text:"Российская Партия Развития • Заявка кандидата в депутаты"},
+    timestamp:new Date().toISOString()
+  };
+
+  try{
+    const response=await fetch(DEPUTY_WEBHOOK_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        username:"Российская Партия Развития",
+        embeds:[embed],
+        allowed_mentions:{parse:[]}
+      })
+    });
+
+    if(!response.ok) throw new Error("Discord HTTP "+response.status);
+
+    message.className="form-message success";
+    message.textContent="Заявка успешно отправлена на рассмотрение.";
+    if(typeof showToast==="function") showToast("Заявка депутата отправлена в Discord","success");
+
+    document.querySelector("#deputyApplicationForm").reset();
+  }catch(error){
+    console.error(error);
+    message.className="form-message error";
+    message.textContent="Не удалось отправить заявку в Discord. Проверьте подключение.";
+    if(typeof showToast==="function") showToast("Ошибка отправки заявки","error");
+  }finally{
+    button.disabled=false;
+    button.textContent="ОТПРАВИТЬ ЗАЯВКУ ДЕПУТАТА";
+  }
+});
+
 </script>
 
 
