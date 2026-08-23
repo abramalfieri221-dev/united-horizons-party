@@ -709,6 +709,24 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
   min-height:120px;
 }
 
+/* AUTO_UHP_ENHANCEMENTS */
+:root{--accent-white:#fff;--accent-blue:#2563a6;--accent-red:#d7263d}
+body{background:radial-gradient(circle at 50% -15%,rgba(37,99,166,.22),transparent 36%),radial-gradient(circle at 100% 45%,rgba(215,38,61,.12),transparent 30%),#03070d}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:linear-gradient(120deg,transparent 0 42%,rgba(255,255,255,.025) 50%,transparent 58%);background-size:260% 260%;animation:uhpLightSweep 12s linear infinite}
+@keyframes uhpLightSweep{0%{background-position:180% 0}100%{background-position:-80% 100%}}
+.header{background:rgba(3,7,13,.88);border-bottom:1px solid rgba(255,255,255,.12)}
+.nav a{transition:color .25s,transform .25s,text-shadow .25s}.nav a:hover{color:#fff;text-shadow:0 0 14px rgba(255,255,255,.35);transform:translateY(-1px)}
+.btn,.card,.stat,.hero-panel{transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease,background .35s ease}
+.card:hover{box-shadow:0 25px 70px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.04) inset}
+.btn:hover{box-shadow:0 12px 35px rgba(255,255,255,.06)}
+.uhp-flag-link{position:relative;display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid rgba(255,255,255,.12);overflow:hidden;background:rgba(255,255,255,.025)}
+.uhp-flag-link:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.9) 0 33.33%,rgba(44,89,143,.85) 33.33% 66.66%,rgba(210,39,58,.85) 66.66%);transform:translateX(-105%);transition:transform .45s ease;opacity:.18}
+.uhp-flag-link:hover:before{transform:translateX(0)}
+.uhp-flag{width:24px;height:16px;display:grid;grid-template-rows:repeat(3,1fr);border:1px solid rgba(255,255,255,.3);overflow:hidden;flex:none}.uhp-flag i:nth-child(1){background:#fff}.uhp-flag i:nth-child(2){background:#245b99}.uhp-flag i:nth-child(3){background:#d5263e}
+.uhp-area{margin-top:45px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.uhp-empty{position:relative;min-height:230px;padding:30px;border:1px solid rgba(255,255,255,.11);background:linear-gradient(145deg,#0a1a2b,#06101b);overflow:hidden}.uhp-empty:before{content:"";position:absolute;left:-30%;top:-55%;width:160%;height:160%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.045) 50%,transparent 58%);animation:uhpShine 7s linear infinite}@keyframes uhpShine{to{transform:translate(28%,28%)}}
+.uhp-empty>*{position:relative}.uhp-empty h3{font-size:24px}.uhp-empty p{margin-top:10px;color:var(--muted);font-size:13px}.uhp-empty .uhp-icon{font-size:30px;margin-bottom:18px}.uhp-badge{display:inline-block;margin-top:20px;padding:6px 10px;border:1px solid rgba(255,255,255,.13);color:#aebdce;font-size:8px;font-weight:900;letter-spacing:2px}
+@media(max-width:800px){.uhp-area{grid-template-columns:1fr}.uhp-flag-link{padding:7px 9px}}
+
 </style>
 </head>
 
@@ -1881,5 +1899,27 @@ setInterval(discordNotice,60000);
 <a class="ai-open discord-open" href="https://discord.gg/XACERtyYWj" target="_blank" rel="noopener" aria-label="Discord партии" title="Discord партии"><svg viewBox="0 0 24 24" aria-hidden="true" class="discord-logo">
 <path d="M19.54 5.01A16.15 16.15 0 0 0 15.55 3.8a.06.06 0 0 0-.06.03c-.17.3-.36.7-.49 1.01a15.1 15.1 0 0 0-4.99 0c-.14-.32-.33-.71-.5-1.01a.06.06 0 0 0-.06-.03 16.2 16.2 0 0 0-3.99 1.21.05.05 0 0 0-.02.02C2.91 8.58 2.22 12.05 2.56 15.47a.07.07 0 0 0 .03.05 16.3 16.3 0 0 0 4.9 2.42.06.06 0 0 0 .07-.02c.38-.52.72-1.07 1.01-1.65a.06.06 0 0 0-.03-.08 10.5 10.5 0 0 1-1.53-.73.06.06 0 0 1-.01-.1c.1-.07.2-.15.3-.22a.06.06 0 0 1 .06-.01c3.2 1.46 6.67 1.46 9.83 0a.06.06 0 0 1 .06.01c.1.07.2.15.3.22a.06.06 0 0 1-.01.1c-.49.29-1 .53-1.53.73a.06.06 0 0 0-.03.08c.3.58.63 1.13 1.01 1.65a.06.06 0 0 0 .07.02 16.2 16.2 0 0 0 4.91-2.42.06.06 0 0 0 .03-.05c.4-3.96-.67-7.4-2.83-10.44a.05.05 0 0 0-.03-.02ZM8.68 13.33c-.96 0-1.75-.88-1.75-1.96s.78-1.97 1.75-1.97c.98 0 1.76.89 1.75 1.97 0 1.08-.78 1.96-1.75 1.96Zm6.64 0c-.96 0-1.75-.88-1.75-1.96s.78-1.97 1.75-1.97c.98 0 1.76.89 1.75 1.97 0 1.08-.78 1.96-1.75 1.96Z"/>
 </svg></a>
+<script id="uhp-enhancements">
+(()=>{
+  const ready=()=>{
+    const nav=document.querySelector('.nav');
+    if(nav){
+      const items=[...nav.querySelectorAll('a')];
+      const hasVote=items.some(a=>/голос/i.test(a.textContent));
+      const hasDocs=items.some(a=>/документ/i.test(a.textContent));
+      if(!hasVote){const a=document.createElement('a');a.href='#uhp-voting';a.className='uhp-flag-link';a.innerHTML='<span class="uhp-flag"><i></i><i></i><i></i></span><span>ГОЛОСОВАНИЕ</span>';nav.appendChild(a)}
+      if(!hasDocs){const a=document.createElement('a');a.href='#uhp-documents';a.textContent='ДОКУМЕНТЫ';nav.appendChild(a)}
+    }
+    if(!document.getElementById('uhp-voting')){
+      const sec=document.createElement('section');sec.id='uhp-voting';sec.className='section';sec.innerHTML='<div class="container"><div class="section-head"><div class="kicker">ГРАЖДАНСКОЕ УЧАСТИЕ</div><h2 class="title">Голосо<span>вание</span></h2><p class="desc">Здесь будут публиковаться активные голосования партии. Данные можно будет загружать через административную панель.</p></div><div class="uhp-area"><div class="uhp-empty"><div class="uhp-icon">◉</div><h3>Голосований пока нет</h3><p>Раздел готов к подключению данных из админ-панели.</p><span class="uhp-badge">ОЖИДАЕТ ПУБЛИКАЦИИ</span></div></div></div>';document.body.appendChild(sec)
+    }
+    if(!document.getElementById('uhp-documents')){
+      const sec=document.createElement('section');sec.id='uhp-documents';sec.className='section';sec.innerHTML='<div class="container"><div class="section-head"><div class="kicker">ОФИЦИАЛЬНЫЕ МАТЕРИАЛЫ</div><h2 class="title">Докумен<span>ты</span></h2><p class="desc">Здесь будут размещаться официальные документы партии. Управление и публикация — через административную панель.</p></div><div class="uhp-area"><div class="uhp-empty"><div class="uhp-icon">▣</div><h3>Документов пока нет</h3><p>Раздел пустой и готов принимать документы из админ-панели.</p><span class="uhp-badge">ОЖИДАЕТ ПУБЛИКАЦИИ</span></div></div></div>';document.body.appendChild(sec)
+    }
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();
+})();
+</script>
+
 </body>
 </html>
