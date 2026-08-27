@@ -1447,6 +1447,122 @@ tr:hover td{background:#f6f9fc !important}
 }
 </style>
 
+
+<style id="rpr-header-logo-fix">
+.brand-logo{
+  width:52px !important;
+  height:52px !important;
+  padding:7px !important;
+  display:grid !important;
+  place-items:center !important;
+  overflow:hidden !important;
+  border-radius:14px !important;
+  background:#fff !important;
+}
+.site-logo{
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  display:block !important;
+  object-fit:contain !important;
+}
+@media(max-width:700px){
+  .brand-logo{
+    width:46px !important;
+    height:46px !important;
+    padding:6px !important;
+  }
+}
+</style>
+
+
+<style id="rpr-tab-navigation">
+/* ===== TRUE MULTI-TAB SITE ===== */
+html{scroll-behavior:smooth}
+body.tabs-mode .tab-page,
+body.tabs-mode .tab-home-extra{
+  display:none !important;
+}
+body.tabs-mode .tab-page.active-tab,
+body.tabs-mode .tab-home-extra.active-tab{
+  display:block !important;
+}
+body.tabs-mode .hero.active-tab{
+  display:grid !important;
+}
+body.tabs-mode .section.active-tab{
+  display:block !important;
+}
+body.tabs-mode .nav a.active{
+  color:#153f69 !important;
+}
+body.tabs-mode .nav a.active::after{
+  width:100% !important;
+}
+.nav{
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.nav a{
+  white-space:nowrap;
+}
+.nav-join{
+  padding:9px 13px !important;
+  border:1px solid #d3dee9;
+  border-radius:10px;
+  background:#f7fafc;
+  color:#153f69 !important;
+}
+.nav-join:hover{
+  background:#153f69 !important;
+  color:#fff !important;
+}
+.nav-join::after{
+  display:none !important;
+}
+.tab-page{
+  animation:tabPageIn .28s ease;
+}
+@keyframes tabPageIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+#tab-home{
+  min-height:calc(100vh - 105px);
+}
+.home-stats{
+  animation:tabPageIn .28s ease;
+}
+@media(max-width:1000px){
+  .nav{
+    position:absolute;
+    top:70px;
+    left:0;
+    right:0;
+    padding:14px 20px 18px;
+    display:none;
+    flex-direction:column;
+    align-items:stretch;
+    gap:4px;
+    background:#fff;
+    border-bottom:1px solid #dbe3ec;
+    box-shadow:0 18px 40px rgba(20,63,105,.10);
+  }
+  .nav.mobile-open{display:flex !important}
+  .nav a{
+    padding:11px 8px;
+    border-bottom:1px solid #edf2f7;
+  }
+  .nav a:last-child{border-bottom:0}
+  .nav-join{
+    margin-top:6px;
+    text-align:center;
+    border:1px solid #d3dee9 !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1469,14 +1585,14 @@ tr:hover td{background:#f6f9fc !important}
 
 <header class="header" id="header">
   <div class="header-inner">
-    <a class="brand" href="#top">
-      <div class="brand-logo"><svg viewBox="0 0 100 100" role="img" aria-label="Российская Партия Развития logo" xmlns="http://www.w3.org/2000/svg">
-  <path class="logo-white" d="M50 8 43 22 30 17 35 31 18 30 34 41 22 49 39 49 31 65 45 57 50 88 55 57 69 65 61 49 78 49 66 41 82 30 65 31 70 17 57 22Z"/>
-  <path class="logo-blue" d="M36 48h28l-3 22-11 12-11-12z"/>
-  <path class="logo-red" d="M42 52h5v20h-5zm8 0h5v23l-5 4zm8 0h5v19l-5 3z"/>
-  <path class="logo-white" d="M50 48c-4-8-3-17 0-22 3 5 4 14 0 22z"/>
-  <circle cx="50" cy="24" r="3.2" class="logo-white"/>
-</svg></div>
+    <a class="brand" href="#home" data-tab="home">
+      <div class="brand-logo">
+  <img
+    src="logo.png"
+    alt="Российская Партия Развития"
+    class="site-logo"
+  >
+</div>
       <div>
         <div class="brand-title">РОССИЙСКАЯ ПАРТИЯ РАЗВИТИЯ</div>
         <div class="brand-sub">ПАРТИЯ · ИГРОВОЙ RP-ПРОЕКТ</div>
@@ -1484,14 +1600,14 @@ tr:hover td{background:#f6f9fc !important}
     </a>
 
     <nav class="nav" id="nav">
-      <a href="#party">ПАРТИЯ</a>
-      <a href="#leadership">РУКОВОДСТВО</a>
-      <a href="#ideology">ИДЕОЛОГИЯ</a>
-      <a href="#program">ПРОГРАММА</a>
-      <a href="#charter">УСТАВ</a>
-      <a href="#members">СОСТАВ</a>
-      <a href="#deputy-application">Заявка депутата</a>
-        <a href="#join">ВСТУПИТЬ</a>
+      <a href="#home" data-tab="home">ГЛАВНАЯ</a>
+      <a href="#about" data-tab="about">О ПАРТИИ</a>
+      <a href="#leadership" data-tab="leadership">РУКОВОДСТВО</a>
+      <a href="#program" data-tab="program">ПРОГРАММА</a>
+      <a href="#structure" data-tab="structure">СТРУКТУРА</a>
+      <a href="#citizens" data-tab="citizens">ГРАЖДАНАМ</a>
+      <a href="#deputy-application" data-tab="deputy">ЗАЯВКА ДЕПУТАТА</a>
+      <a href="#join" data-tab="join" class="nav-join">ВСТУПИТЬ В ПАРТИЮ</a>
     </nav>
 
     <button class="menu-btn" id="menuBtn" aria-label="Меню">☰</button>
@@ -1500,7 +1616,7 @@ tr:hover td{background:#f6f9fc !important}
 
 <main id="top">
 
-<section class="container hero">
+<section class="container hero tab-page" id="tab-home">
   <div class="hero-bg">
     <div class="grid-bg"></div>
     <div class="glow"></div>
@@ -1538,7 +1654,7 @@ tr:hover td{background:#f6f9fc !important}
   </div>
 </section>
 
-<section class="container" style="padding-bottom:90px">
+<section class="container home-stats tab-home-extra" style="padding-bottom:90px">
   <div class="stat-grid reveal">
     <div class="stat"><div class="stat-number">01</div><div class="stat-label">ЕДИНАЯ КОМАНДА</div></div>
     <div class="stat"><div class="stat-number">24<span>/7</span></div><div class="stat-label">ОТКРЫТЫЙ ДИАЛОГ</div></div>
@@ -1547,7 +1663,7 @@ tr:hover td{background:#f6f9fc !important}
   </div>
 </section>
 
-<section class="section" id="party">
+<section class="section tab-page" id="party" data-tab-page="about">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">01 · ABOUT THE ПАРТИЯ</div>
@@ -1602,7 +1718,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="history">
+<section class="section tab-page" id="history" data-tab-page="about">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">02 · OUR STORY</div>
@@ -1635,7 +1751,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="leadership">
+<section class="section tab-page" id="leadership" data-tab-page="leadership">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">03 · LEADERSHIP</div>
@@ -1665,7 +1781,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="ideology">
+<section class="section tab-page" id="ideology" data-tab-page="about">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">04 · ИДЕОЛОГИЯ</div>
@@ -1753,7 +1869,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="program">
+<section class="section tab-page" id="program" data-tab-page="program">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">05 · PROGRAM</div>
@@ -1790,7 +1906,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="goals">
+<section class="section tab-page" id="goals" data-tab-page="program">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">06 · GOALS</div>
@@ -1808,7 +1924,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="charter">
+<section class="section tab-page" id="charter" data-tab-page="structure">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">07 · УСТАВ</div>
@@ -1829,7 +1945,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="members">
+<section class="section tab-page" id="members" data-tab-page="structure">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">08 · СОСТАВ</div>
@@ -1872,7 +1988,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="blacklist">
+<section class="section tab-page" id="blacklist" data-tab-page="structure">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">09 · ЧЁРНЫЙ СПИСОК</div>
@@ -1888,7 +2004,7 @@ tr:hover td{background:#f6f9fc !important}
 </div>
 </section>
 
-<section class="section" id="faq">
+<section class="section tab-page" id="faq" data-tab-page="citizens">
 <div class="container">
   <div class="section-head reveal">
     <div class="kicker">10 · ЧАСТЫЕ ВОПРОСЫ</div>
@@ -1921,7 +2037,7 @@ tr:hover td{background:#f6f9fc !important}
 </section>
 
 
-<section id="deputy-application" class="section">
+<section id="deputy-application" class="section tab-page" data-tab-page="deputy">
   <div class="container">
     <div class="section-head reveal">
       <div>
@@ -2024,7 +2140,7 @@ tr:hover td{background:#f6f9fc !important}
     </form>
   </div>
 </div>
-<section class="section" id="join">
+<section class="section tab-page" id="join" data-tab-page="join">
 <div class="container">
   <div class="join reveal">
     <div class="join-grid">
@@ -2642,6 +2758,99 @@ setInterval(discordNotice,60000);
     }
   });
   observer.observe(nav,{attributes:true,attributeFilter:["class","style"]});
+})();
+</script>
+
+
+<script id="rpr-tabs-script">
+(function(){
+  document.body.classList.add("tabs-mode");
+
+  const nav = document.getElementById("nav");
+  const menuBtn = document.getElementById("menuBtn");
+  const links = Array.from(document.querySelectorAll("[data-tab]"));
+
+  const groups = {
+    home: ["#tab-home", ".home-stats"],
+    about: ['[data-tab-page="about"]'],
+    leadership: ['[data-tab-page="leadership"]'],
+    program: ['[data-tab-page="program"]'],
+    structure: ['[data-tab-page="structure"]'],
+    citizens: ['[data-tab-page="citizens"]'],
+    deputy: ['[data-tab-page="deputy"]'],
+    join: ['[data-tab-page="join"]']
+  };
+
+  const allPageSelectors = [
+    "#tab-home",
+    ".home-stats",
+    '[data-tab-page="about"]',
+    '[data-tab-page="leadership"]',
+    '[data-tab-page="program"]',
+    '[data-tab-page="structure"]',
+    '[data-tab-page="citizens"]',
+    '[data-tab-page="deputy"]',
+    '[data-tab-page="join"]'
+  ];
+
+  function showTab(name, updateHash=true){
+    if(!groups[name]) name="home";
+
+    // Hide all tab content.
+    document.querySelectorAll(allPageSelectors.join(",")).forEach(el=>{
+      el.classList.remove("active-tab");
+    });
+
+    // Show selected group.
+    groups[name].forEach(selector=>{
+      document.querySelectorAll(selector).forEach(el=>{
+        el.classList.add("active-tab");
+      });
+    });
+
+    // Active navigation.
+    links.forEach(link=>{
+      link.classList.toggle("active", link.dataset.tab===name);
+    });
+
+    // Close mobile menu.
+    if(nav) nav.classList.remove("mobile-open");
+
+    // Scroll to top so switching tabs feels like a new page.
+    window.scrollTo({top:0, behavior:"instant"});
+
+    if(updateHash){
+      const newHash = "#" + name;
+      if(location.hash !== newHash){
+        history.replaceState(null,"",newHash);
+      }
+    }
+  }
+
+  links.forEach(link=>{
+    link.addEventListener("click", e=>{
+      e.preventDefault();
+      showTab(link.dataset.tab, true);
+    });
+  });
+
+  if(menuBtn){
+    menuBtn.addEventListener("click", ()=>{
+      nav.classList.toggle("mobile-open");
+    });
+  }
+
+  const initial = location.hash.replace("#","");
+  showTab(groups[initial] ? initial : "home", false);
+
+  window.addEventListener("popstate", ()=>{
+    const name = location.hash.replace("#","");
+    showTab(groups[name] ? name : "home", false);
+  });
+  window.addEventListener("hashchange", ()=>{
+    const name = location.hash.replace("#","");
+    showTab(groups[name] ? name : "home", false);
+  });
 })();
 </script>
 
