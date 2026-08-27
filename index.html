@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#07111f">
+<meta name="theme-color" content="#174f87">
 <meta name="description" content="Российская Партия Развития — вымышленная политическая партия игрового проекта игрового RP-проекта.">
 <title>Российская Партия Развития — игрового RP-проекта Live RP</title>
 
@@ -708,6 +708,77 @@ body[data-theme="ocean"] .glow.blue{background:#176d8c}
 #deputyApplicationModal textarea.form-control{
   min-height:120px;
 }
+
+
+/* RUSSIAN TRICOLOR THEME v1 */
+:root{
+  --bg:#f5f7fa;
+  --bg2:#ffffff;
+  --panel:#ffffff;
+  --panel2:#eef3f8;
+  --line:rgba(20,55,90,.14);
+  --line2:rgba(20,55,90,.10);
+  --text:#132238;
+  --muted:#5e6f82;
+  --muted2:#7d8da0;
+  --red:#c51f3a;
+  --red2:#d52b46;
+  --blue:#174f87;
+  --blue2:#2d73ad;
+  --white:#ffffff;
+  --green:#168a5a;
+  --shadow:0 24px 70px rgba(20,55,90,.12);
+}
+body{
+  background:
+    radial-gradient(circle at 50% -20%,rgba(45,115,173,.12),transparent 38%),
+    radial-gradient(circle at 0% 35%,rgba(197,31,58,.08),transparent 28%),
+    var(--bg);
+  color:var(--text);
+}
+body:before{
+  content:"";position:fixed;left:0;right:0;top:0;height:3px;z-index:10000;
+  background:linear-gradient(90deg,#fff 0 33.33%,#174f87 33.33% 66.66%,#c51f3a 66.66%);
+  pointer-events:none;
+}
+#progress{background:linear-gradient(90deg,#fff,#174f87,#c51f3a);box-shadow:0 0 18px rgba(23,79,135,.35)}
+#loader{background:#f5f7fa}
+.loader-mark{border-color:rgba(23,79,135,.18);background:linear-gradient(145deg,#fff,#eaf0f6);color:#174f87}
+.loader-line{background:#dbe5ee}
+.loader-line:after{background:linear-gradient(90deg,#fff,#174f87,#c51f3a)}
+.disclaimer{background:#fff;border-bottom-color:rgba(23,79,135,.12);color:#68798b}
+.disclaimer strong{color:#c51f3a}
+.header{background:rgba(255,255,255,.88);border-bottom-color:rgba(23,79,135,.12)}
+.header.scrolled{box-shadow:0 15px 50px rgba(23,79,135,.12)}
+.brand-logo{border-color:rgba(23,79,135,.18);background:linear-gradient(145deg,#fff,#eaf1f7);box-shadow:inset 0 0 25px rgba(23,79,135,.04),0 8px 30px rgba(23,79,135,.10)}
+.brand-logo .logo-red{fill:#c51f3a}.brand-logo .logo-blue{fill:#174f87}
+.brand-sub,.kicker,.card-index,.timeline-year,.emblem p{color:#c51f3a}
+.nav a{color:#5f7185}.nav a:after{background:#c51f3a}.nav a:hover{color:#174f87}
+.menu-btn{background:#fff;color:#174f87;border-color:rgba(23,79,135,.16)}
+.section{border-top-color:rgba(23,79,135,.09)}
+.title span,.hero h1 span{color:#174f87}
+.hero-kicker{color:#627387}.hero-kicker:before{background:#c51f3a}
+.hero-lead,.desc,.card p,.timeline p{color:#5e6f82}
+.glow{background:#c51f3a;opacity:.09}.glow.blue{background:#174f87}
+.grid-bg{opacity:.10;background-image:linear-gradient(rgba(23,79,135,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(23,79,135,.10) 1px,transparent 1px)}
+.btn{border-color:rgba(23,79,135,.22);background:#fff;color:#17304d;box-shadow:0 8px 25px rgba(23,79,135,.06)}
+.btn:hover{border-color:#174f87}.btn-primary{background:linear-gradient(135deg,#174f87,#2d73ad);border-color:#174f87;color:#fff}.btn-primary:hover{box-shadow:0 14px 35px rgba(23,79,135,.20)}
+.hero-panel{border-color:rgba(23,79,135,.18);background:radial-gradient(circle at center,rgba(45,115,173,.14),transparent 48%),linear-gradient(145deg,#fff,#edf3f8);box-shadow:var(--shadow)}
+.hero-panel:before{border-color:rgba(23,79,135,.10)}
+.orbit{border-color:rgba(23,79,135,.16)}.orbit:after{background:#c51f3a;box-shadow:0 0 18px rgba(197,31,58,.35)}
+.emblem-icon{border-color:rgba(23,79,135,.20);background:#fff;box-shadow:0 0 70px rgba(23,79,135,.10)}
+.panel-tag{color:#718398}.status-dot{color:#168a5a}
+.stat-grid{background:rgba(23,79,135,.14);border-color:rgba(23,79,135,.14)}
+.stat{background:#fff}.stat:hover{background:#f0f5f9}.stat-number span{color:#c51f3a}.stat-label{color:#718398}
+.card{border-color:rgba(23,79,135,.14);background:linear-gradient(145deg,#fff,#f0f5f9);box-shadow:0 8px 30px rgba(23,79,135,.04)}
+.card:before{background:linear-gradient(90deg,#174f87,#c51f3a)}.card:hover{border-color:rgba(23,79,135,.30);box-shadow:0 20px 50px rgba(23,79,135,.10)}
+.card-icon{border-color:rgba(23,79,135,.14);background:#f4f7fa;color:#174f87}
+.timeline:before{background:rgba(23,79,135,.16)}.timeline-item:before{border-color:#c51f3a;background:#f5f7fa;box-shadow:0 0 0 6px rgba(197,31,58,.08)}
+.person{background:#fff!important;border-color:rgba(23,79,135,.14)!important;box-shadow:0 8px 30px rgba(23,79,135,.05)}
+.footer{background:#fff!important;border-top-color:rgba(23,79,135,.12)!important;color:#5e6f82!important}
+input,textarea,select{background:#fff!important;color:#132238!important;border-color:rgba(23,79,135,.18)!important}
+::placeholder{color:#91a0b0!important}
+::-webkit-scrollbar-track{background:#edf2f6}::-webkit-scrollbar-thumb{background:#9aabba}::-webkit-scrollbar-thumb:hover{background:#174f87}
 
 </style>
 
