@@ -74,10 +74,11 @@ button{cursor:pointer}
 .loader-mark{
   width:76px;height:76px;margin:auto;
   display:grid;place-items:center;
-  border:1px solid rgba(255,255,255,.18);
-  background:linear-gradient(145deg,#102a45,#06101d);
-  font-size:32px;
-  animation:pulseMark 1.4s infinite;
+  border:1px solid rgba(20,63,105,.16);
+  background:#fff;
+  padding:14px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(20,63,105,.10);
 }
 .loader-name{
   margin-top:20px;
@@ -1280,6 +1281,29 @@ tr:hover td{background:#f6f9fc !important}
   .container{padding:0 16px !important}
   .hero h1{font-size:52px !important}
   .hero-panel{min-height:340px !important}
+}
+</style>
+
+
+<style id="rpr-loader-logo-fix">
+.loader-mark{
+  width:76px !important;
+  height:76px !important;
+  margin:auto !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:14px !important;
+  overflow:hidden !important;
+  border-radius:0 !important;
+}
+.loader-mark img,
+.loader-logo{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  display:block !important;
+  max-width:100% !important;
+  max-height:100% !important;
 }
 </style>
 
