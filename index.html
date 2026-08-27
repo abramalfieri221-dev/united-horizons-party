@@ -1309,19 +1309,142 @@ tr:hover td{background:#f6f9fc !important}
 
 
 <style id="rpr-two-leader-photos">
-.leadership-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}
-.person-photo{padding:0 0 30px;overflow:hidden;}
-.person-photo-wrap{width:100%;height:360px;background:#eef4fa;border-bottom:1px solid rgba(20,63,105,.12);overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.person-photo-img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;transition:transform .45s ease;}
-.person-photo:hover .person-photo-img{transform:scale(1.02);}
-@media(max-width:1000px){.person-photo-wrap{height:330px;}}
-@media(max-width:700px){.person-photo-wrap{height:360px;}}
-@media(max-width:450px){.person-photo-wrap{height:300px;}}
-.person-photo .person-role,.person-photo h3,.person-photo p{margin-left:30px;margin-right:30px;}
-.person-photo .person-role{margin-top:24px;}
-.person-photo h3{margin-top:9px;}
-.person-photo p{margin-top:9px;}
-@media(max-width:700px){.leadership-grid{grid-template-columns:1fr;}}
+/* ===== ЭЛЕГАНТНЫЕ КАРТОЧКИ РУКОВОДСТВА ===== */
+.leadership-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:28px;
+  margin-top:48px;
+  align-items:stretch;
+}
+
+.person.person-photo{
+  position:relative;
+  padding:0 0 28px !important;
+  overflow:hidden;
+  border-radius:22px !important;
+  border:1px solid #dbe5ef !important;
+  background:#fff !important;
+  box-shadow:0 18px 45px rgba(21,57,92,.09) !important;
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+.person.person-photo:hover{
+  transform:translateY(-6px);
+  border-color:#aac3d9 !important;
+  box-shadow:0 28px 70px rgba(21,57,92,.14) !important;
+}
+
+/* Фото — одинаковая пропорция и аккуратная обрезка без "съехавших" голов */
+.person-photo-wrap{
+  position:relative;
+  width:100%;
+  aspect-ratio: 1.42 / 1;
+  min-height:0;
+  overflow:hidden;
+  background:#eef3f8;
+  border-bottom:1px solid #dbe5ef;
+}
+
+.person-photo-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(10,33,58,.02) 48%,rgba(10,33,58,.16) 100%);
+  pointer-events:none;
+}
+
+.person-photo-img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center 18%;
+  transition:transform .6s cubic-bezier(.2,.7,.2,1);
+}
+
+.person.person-photo:hover .person-photo-img{
+  transform:scale(1.035);
+}
+
+/* Тонкая фирменная полоска */
+.person.person-photo::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:4px;
+  z-index:3;
+  background:linear-gradient(90deg,#153f69 0%,#2f78b9 52%,#d52b46 100%);
+}
+
+/* Информация */
+.person-photo .person-role,
+.person-photo h3,
+.person-photo p{
+  margin-left:30px;
+  margin-right:30px;
+}
+
+.person-photo .person-role{
+  margin-top:25px;
+  margin-bottom:8px;
+  font-size:8px;
+  line-height:1.2;
+  letter-spacing:2.4px;
+  font-weight:950;
+  color:#d12b48 !important;
+}
+
+.person-photo h3{
+  margin-top:0;
+  font-size:24px;
+  line-height:1.12;
+  letter-spacing:-.65px;
+  color:#183653 !important;
+}
+
+.person-photo p{
+  margin-top:11px;
+  max-width:92%;
+  font-size:12px;
+  line-height:1.65;
+  color:#6a7c90 !important;
+}
+
+/* Бейдж в углу */
+.person-photo::after{
+  content:"РПР";
+  position:absolute;
+  right:18px;
+  top:18px;
+  z-index:4;
+  padding:7px 9px;
+  border-radius:9px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(21,63,105,.12);
+  color:#153f69;
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:1.6px;
+  box-shadow:0 8px 24px rgba(12,35,58,.10);
+}
+
+@media(max-width:900px){
+  .leadership-grid{grid-template-columns:1fr;gap:22px;}
+  .person-photo-wrap{aspect-ratio:1.58 / 1;}
+}
+
+@media(max-width:560px){
+  .leadership-grid{gap:18px;margin-top:34px;}
+  .person-photo-wrap{aspect-ratio:1.32 / 1;}
+  .person-photo .person-role,
+  .person-photo h3,
+  .person-photo p{margin-left:22px;margin-right:22px;}
+  .person-photo h3{font-size:21px;}
+}
 </style>
 
 </head>
