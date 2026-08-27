@@ -1647,6 +1647,37 @@ body.tabs-mode .nav a.active::after{
 .footer .footer-bottom{color:#b8c9d8 !important;}
 </style>
 
+
+<style id="rpr-home-banner-fix">
+.home-banner{
+  grid-column:1 / -1;
+  width:100%;
+  margin:0 0 6px;
+  overflow:hidden;
+  border:1px solid #d8e2ec;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 16px 40px rgba(20,63,105,.08);
+}
+.home-banner-img{
+  width:100%;
+  height:auto;
+  max-height:390px;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+}
+@media(max-width:700px){
+  .home-banner{
+    margin-bottom:0;
+    border-radius:14px;
+  }
+  .home-banner-img{
+    max-height:240px;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1706,6 +1737,14 @@ body.tabs-mode .nav a.active::after{
     <div class="glow"></div>
     <div class="glow blue"></div>
     <div class="particles" id="particles"></div>
+  </div>
+
+  <div class="home-banner reveal">
+    <img
+        src="banner.png"
+        alt="Российская Партия Развития"
+        class="home-banner-img"
+    >
   </div>
 
   <div class="hero-copy reveal">
