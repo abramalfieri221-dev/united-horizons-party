@@ -1882,6 +1882,209 @@ body.tabs-mode .nav a.active{
 }
 </style>
 
+
+<style id="rpr-deputy-modal-final">
+/* =========================================================
+   ЗАЯВКА ДЕПУТАТА — НОВЫЙ АККУРАТНЫЙ ВИД
+   ========================================================= */
+#deputyApplicationModal{
+  align-items:center !important;
+  justify-content:center !important;
+  padding:22px !important;
+  background:rgba(15,34,55,.42) !important;
+  backdrop-filter:blur(10px);
+}
+
+#deputyApplicationModal .modal-content{
+  position:relative !important;
+  width:min(1040px,100%) !important;
+  max-width:1040px !important;
+  height:min(88vh,880px) !important;
+  max-height:88vh !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  margin:0 !important;
+  padding:38px 42px 34px !important;
+  border-radius:24px !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(40,115,183,.06),transparent 28%),
+    #fff !important;
+  border:1px solid #d6e2ec !important;
+  box-shadow:0 30px 100px rgba(13,43,72,.22) !important;
+}
+
+#deputyApplicationModal .modal-close{
+  position:absolute !important;
+  top:18px !important;
+  right:18px !important;
+  width:40px !important;
+  height:40px !important;
+  z-index:5 !important;
+  border-radius:11px !important;
+  background:#f7f9fc !important;
+  color:#45627d !important;
+  border:1px solid #dbe5ee !important;
+  font-size:21px !important;
+}
+
+#deputyApplicationModal .modal-close:hover{
+  background:#edf4fa !important;
+  color:#153f69 !important;
+}
+
+#deputyApplicationModal .kicker{
+  margin-right:55px !important;
+  font-size:8px !important;
+  letter-spacing:2.8px !important;
+  color:#14518d !important;
+}
+
+#deputyApplicationModal .modal-title{
+  margin-top:9px !important;
+  font-size:clamp(42px,5vw,68px) !important;
+  line-height:.94 !important;
+  letter-spacing:-2.6px !important;
+}
+
+#deputyApplicationModal .desc{
+  margin-top:14px !important;
+  max-width:780px !important;
+  font-size:13px !important;
+}
+
+#deputyApplicationModal .form{
+  margin-top:30px !important;
+}
+
+#deputyApplicationModal .form-step-title{
+  margin:31px 0 17px !important;
+  padding:0 0 10px !important;
+  border-top:0 !important;
+  border-bottom:1px solid #e3ebf2 !important;
+  color:#173f63 !important;
+  font-size:12px !important;
+  letter-spacing:2.1px !important;
+}
+
+#deputyApplicationModal .form-group{
+  margin-bottom:15px !important;
+}
+
+/* Пары коротких полей в одну строку */
+#deputyApplicationModal #deputyNickname,
+#deputyApplicationModal #deputyRealAge,
+#deputyApplicationModal #deputyCharacterAge,
+#deputyApplicationModal #deputyDiscord{
+  min-height:52px !important;
+}
+
+#deputyApplicationModal .form-control{
+  width:100% !important;
+  min-height:52px !important;
+  padding:14px 16px !important;
+  border-radius:12px !important;
+  border:1px solid #cddbe7 !important;
+  background:#fff !important;
+  color:#183652 !important;
+  font-size:13px !important;
+  box-shadow:none !important;
+}
+
+#deputyApplicationModal .form-control:focus{
+  outline:none !important;
+  border-color:#3a78ad !important;
+  box-shadow:0 0 0 4px rgba(40,115,183,.09) !important;
+}
+
+#deputyApplicationModal textarea.form-control{
+  min-height:104px !important;
+  line-height:1.5 !important;
+}
+
+#deputyApplicationModal #deputyMotivation,
+#deputyApplicationModal #deputyPartyReason,
+#deputyApplicationModal #deputyProblems{
+  min-height:118px !important;
+}
+
+#deputyApplicationModal #deputyInitiative1,
+#deputyApplicationModal #deputyInitiative2,
+#deputyApplicationModal #deputyInitiative3,
+#deputyApplicationModal #deputyReaction{
+  min-height:100px !important;
+}
+
+#deputyApplicationModal .form-check{
+  margin:22px 0 18px !important;
+  padding:14px 15px !important;
+  border:1px solid #e0e8ef !important;
+  border-radius:12px !important;
+  background:#f8fafc !important;
+  color:#536b82 !important;
+}
+
+#deputyApplicationModal .submit{
+  min-height:54px !important;
+  border-radius:12px !important;
+  font-size:10px !important;
+  letter-spacing:1.8px !important;
+}
+
+/* Две колонки для компактных данных */
+#deputyApplicationModal .form > .form-group:nth-of-type(1),
+#deputyApplicationModal .form > .form-group:nth-of-type(2),
+#deputyApplicationModal .form > .form-group:nth-of-type(3),
+#deputyApplicationModal .form > .form-group:nth-of-type(4){
+  display:inline-block;
+  vertical-align:top;
+  width:calc(50% - 9px);
+}
+
+#deputyApplicationModal .form > .form-group:nth-of-type(1),
+#deputyApplicationModal .form > .form-group:nth-of-type(3){
+  margin-right:14px;
+}
+
+#deputyApplicationModal .form > .form-group:nth-of-type(n+5){
+  display:block;
+  width:100%;
+}
+
+@media(max-width:760px){
+  #deputyApplicationModal{
+    padding:10px !important;
+  }
+
+  #deputyApplicationModal .modal-content{
+    width:100% !important;
+    height:calc(100vh - 20px) !important;
+    max-height:calc(100vh - 20px) !important;
+    padding:28px 20px 24px !important;
+    border-radius:18px !important;
+  }
+
+  #deputyApplicationModal .modal-title{
+    font-size:39px !important;
+    letter-spacing:-1.8px !important;
+  }
+
+  #deputyApplicationModal .form > .form-group:nth-of-type(1),
+  #deputyApplicationModal .form > .form-group:nth-of-type(2),
+  #deputyApplicationModal .form > .form-group:nth-of-type(3),
+  #deputyApplicationModal .form > .form-group:nth-of-type(4){
+    display:block;
+    width:100%;
+    margin-right:0;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #deputyApplicationModal .modal-content{
+    scroll-behavior:auto;
+  }
+}
+</style>
+
 </head>
 
 <body>
