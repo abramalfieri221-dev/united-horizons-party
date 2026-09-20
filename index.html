@@ -3541,4 +3541,1449 @@ document.querySelector("#deputyApplicationForm")?.addEventListener("submit",asyn
 </script>
 
 </body>
+
+<!-- =========================================================
+     RPR ADMIN + PRESS SERVICE
+     Вставить перед </body>
+========================================================= -->
+
+<style>
+/* ===== ПРЕСС-СЛУЖБА ===== */
+
+#press-service {
+    display: none;
+    padding: 80px 20px;
+}
+
+.press-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.press-header {
+    margin-bottom: 40px;
+}
+
+.press-label {
+    color: #e31d2b;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.press-title {
+    font-size: 42px;
+    margin: 10px 0;
+    font-weight: 900;
+}
+
+.press-subtitle {
+    color: #8998a8;
+    max-width: 700px;
+}
+
+.press-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.press-card {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: .25s;
+}
+
+.press-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(227,29,43,.6);
+}
+
+.press-image {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+}
+
+.press-no-image {
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg,#101d2b,#172b40);
+    color: #697d91;
+    font-size: 13px;
+}
+
+.press-content {
+    padding: 22px;
+}
+
+.press-category {
+    color: #e31d2b;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.press-card h3 {
+    margin: 9px 0;
+    font-size: 20px;
+}
+
+.press-date {
+    color: #718397;
+    font-size: 11px;
+    margin-bottom: 12px;
+}
+
+.press-card p {
+    color: #94a4b4;
+    line-height: 1.7;
+}
+
+.press-empty {
+    padding: 50px;
+    text-align: center;
+    color: #718397;
+    border: 1px dashed rgba(255,255,255,.12);
+    border-radius: 15px;
+}
+
+/* ===== ADMIN MODAL ===== */
+
+#rpr-admin-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: rgba(2,7,12,.88);
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+}
+
+.rpr-admin {
+    width: min(1100px,92%);
+    margin: 50px auto;
+    background: #091522;
+    border: 1px solid #26394b;
+    border-radius: 18px;
+    box-shadow: 0 30px 100px rgba(0,0,0,.6);
+    overflow: hidden;
+}
+
+.rpr-admin-top {
+    padding: 22px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1d3040;
+}
+
+.rpr-admin-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 900;
+}
+
+.rpr-admin-logo span {
+    background: #e31d2b;
+    padding: 9px 12px;
+    border-radius: 8px;
+}
+
+.rpr-admin-close {
+    border: 0;
+    background: transparent;
+    color: #91a1b1;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.rpr-admin-body {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    min-height: 600px;
+}
+
+.rpr-admin-menu {
+    border-right: 1px solid #1d3040;
+    padding: 20px;
+}
+
+.rpr-admin-menu button {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    color: #91a1b1;
+    padding: 13px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.rpr-admin-menu button:hover,
+.rpr-admin-menu button.active {
+    background: rgba(227,29,43,.12);
+    color: #fff;
+}
+
+.rpr-admin-content {
+    padding: 30px;
+}
+
+.rpr-admin-content h2 {
+    margin-top: 0;
+}
+
+.rpr-admin-stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.rpr-stat {
+    padding: 20px;
+    border: 1px solid #1d3040;
+    background: #0c1b29;
+    border-radius: 12px;
+}
+
+.rpr-stat strong {
+    display: block;
+    font-size: 30px;
+}
+
+.rpr-stat span {
+    color: #718397;
+    font-size: 11px;
+}
+
+.rpr-admin-section {
+    display: none;
+}
+
+.rpr-admin-section.active {
+    display: block;
+}
+
+.rpr-form {
+    display: grid;
+    gap: 15px;
+}
+
+.rpr-form label {
+    color: #9babb9;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.rpr-form input,
+.rpr-form textarea,
+.rpr-form select {
+    width: 100%;
+    margin-top: 7px;
+    padding: 12px;
+    border-radius: 7px;
+    border: 1px solid #293d4e;
+    background: #06111c;
+    color: #fff;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.rpr-form textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.rpr-button {
+    border: 0;
+    background: #e31d2b;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 7px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.rpr-button.secondary {
+    background: #172939;
+}
+
+.rpr-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.rpr-list-item {
+    padding: 15px;
+    background: #0c1b29;
+    border: 1px solid #1d3040;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+}
+
+.rpr-list-item small {
+    color: #e31d2b;
+}
+
+.rpr-actions {
+    display: flex;
+    gap: 7px;
+}
+
+.rpr-actions button {
+    padding: 7px 10px;
+    border-radius: 5px;
+    border: 1px solid #293d4e;
+    background: transparent;
+    color: #aab8c4;
+    cursor: pointer;
+}
+
+.rpr-actions .delete {
+    color: #ff7078;
+}
+
+.rpr-login {
+    width: min(400px,90%);
+    margin: 100px auto;
+    padding: 30px;
+    background: #091522;
+    border: 1px solid #26394b;
+    border-radius: 15px;
+}
+
+.rpr-login h2 {
+    margin-top: 0;
+}
+
+.rpr-login input {
+    width: 100%;
+    padding: 13px;
+    margin: 7px 0 15px;
+    box-sizing: border-box;
+    background: #06111c;
+    color: #fff;
+    border: 1px solid #293d4e;
+    border-radius: 7px;
+}
+
+@media(max-width:800px) {
+    .press-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rpr-admin-body {
+        grid-template-columns: 1fr;
+    }
+
+    .rpr-admin-menu {
+        border-right: 0;
+        border-bottom: 1px solid #1d3040;
+    }
+
+    .rpr-admin-stats {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<!-- ===== ПРЕСС-СЛУЖБА ===== -->
+
+<section id="press-service">
+    <div class="press-container">
+
+        <div class="press-header">
+            <div class="press-label">RPR · PRESS SERVICE</div>
+
+            <h2 class="press-title">
+                Пресс-служба
+            </h2>
+
+            <p class="press-subtitle">
+                Официальные новости, заявления и материалы
+                Российской Партии Развития в рамках игрового
+                проекта Live RP.
+            </p>
+        </div>
+
+        <div id="press-news-list" class="press-grid"></div>
+
+    </div>
+</section>
+
+<!-- ===== ADMIN ===== -->
+
+<div id="rpr-admin-overlay">
+
+    <div id="rpr-admin-login" class="rpr-login">
+
+        <div class="rpr-admin-logo">
+            <span>РПР</span>
+            ADMIN
+        </div>
+
+        <h2>Админ-панель</h2>
+
+        <p style="color:#718397">
+            Управление сайтом и пресс-службой.
+        </p>
+
+        <input
+            id="rpr-admin-login-input"
+            placeholder="Логин"
+        >
+
+        <input
+            id="rpr-admin-password-input"
+            type="password"
+            placeholder="Пароль"
+        >
+
+        <button
+            class="rpr-button"
+            onclick="rprLogin()"
+        >
+            Войти
+        </button>
+
+        <p
+            id="rpr-login-error"
+            style="display:none;color:#ff7078"
+        >
+            Неверный логин или пароль.
+        </p>
+
+    </div>
+
+
+    <div
+        id="rpr-admin-panel"
+        class="rpr-admin"
+        style="display:none"
+    >
+
+        <div class="rpr-admin-top">
+
+            <div class="rpr-admin-logo">
+                <span>РПР</span>
+                ADMIN PANEL
+            </div>
+
+            <button
+                class="rpr-admin-close"
+                onclick="closeRprAdmin()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="rpr-admin-body">
+
+            <aside class="rpr-admin-menu">
+
+                <button
+                    class="active"
+                    onclick="rprAdminSection('dashboard',this)"
+                >
+                    📊 Панель
+                </button>
+
+                <button
+                    onclick="rprAdminSection('leadership',this)"
+                >
+                    👥 Руководство
+                </button>
+
+                <button
+                    onclick="rprAdminSection('press',this)"
+                >
+                    📰 Пресс-служба
+                </button>
+
+            </aside>
+
+
+            <main class="rpr-admin-content">
+
+                <!-- DASHBOARD -->
+
+                <section
+                    id="rpr-section-dashboard"
+                    class="rpr-admin-section active"
+                >
+
+                    <h2>Панель управления</h2>
+
+                    <p style="color:#718397">
+                        Управление содержимым сайта.
+                    </p>
+
+                    <div class="rpr-admin-stats">
+
+                        <div class="rpr-stat">
+                            <strong id="rpr-stat-news">0</strong>
+                            <span>Новостей</span>
+                        </div>
+
+                        <div class="rpr-stat">
+                            <strong id="rpr-stat-leaders">0</strong>
+                            <span>Руководителей</span>
+                        </div>
+
+                        <div class="rpr-stat">
+                            <strong id="rpr-stat-published">0</strong>
+                            <span>Опубликовано</span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- LEADERSHIP -->
+
+                <section
+                    id="rpr-section-leadership"
+                    class="rpr-admin-section"
+                >
+
+                    <h2>Руководство</h2>
+
+                    <form
+                        class="rpr-form"
+                        onsubmit="rprAddLeader(event)"
+                    >
+
+                        <label>
+                            Имя и фамилия
+
+                            <input
+                                id="rpr-leader-name"
+                                required
+                            >
+                        </label>
+
+                        <label>
+                            Должность
+
+                            <input
+                                id="rpr-leader-position"
+                                required
+                            >
+                        </label>
+
+                        <label>
+                            Фотография
+
+                            <input
+                                id="rpr-leader-image"
+                                placeholder="URL изображения"
+                            >
+                        </label>
+
+                        <label>
+                            Описание
+
+                            <textarea
+                                id="rpr-leader-description"
+                            ></textarea>
+
+                        </label>
+
+                        <button class="rpr-button">
+                            Добавить руководителя
+                        </button>
+
+                    </form>
+
+                    <div
+                        id="rpr-leaders-list"
+                        class="rpr-list"
+                    ></div>
+
+                </section>
+
+
+                <!-- PRESS -->
+
+                <section
+                    id="rpr-section-press"
+                    class="rpr-admin-section"
+                >
+
+                    <h2>Пресс-служба</h2>
+
+                    <form
+                        class="rpr-form"
+                        onsubmit="rprAddNews(event)"
+                    >
+
+                        <label>
+                            Заголовок
+
+                            <input
+                                id="rpr-news-title"
+                                required
+                            >
+                        </label>
+
+                        <label>
+                            Категория
+
+                            <select id="rpr-news-category">
+
+                                <option>
+                                    Новости
+                                </option>
+
+                                <option>
+                                    Заявления
+                                </option>
+
+                                <option>
+                                    Мероприятия
+                                </option>
+
+                                <option>
+                                    Руководство
+                                </option>
+
+                                <option>
+                                    Пресс-релиз
+                                </option>
+
+                            </select>
+
+                        </label>
+
+                        <label>
+                            Фотография
+
+                            <input
+                                id="rpr-news-image"
+                                placeholder="URL изображения"
+                            >
+                        </label>
+
+                        <label>
+                            Краткое описание
+
+                            <textarea
+                                id="rpr-news-excerpt"
+                                required
+                            ></textarea>
+
+                        </label>
+
+                        <label>
+                            Текст новости
+
+                            <textarea
+                                id="rpr-news-content"
+                                required
+                            ></textarea>
+
+                        </label>
+
+                        <button class="rpr-button">
+                            Опубликовать
+                        </button>
+
+                    </form>
+
+                    <div
+                        id="rpr-news-admin-list"
+                        class="rpr-list"
+                    ></div>
+
+                </section>
+
+            </main>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+/* =========================================================
+   RPR ADMIN SYSTEM
+========================================================= */
+
+(function () {
+
+    const NEWS_KEY = "rpr_press_news";
+    const LEADERS_KEY = "rpr_leadership";
+
+    /*
+       ВАЖНО:
+       Это тестовая клиентская авторизация.
+
+       После подключения настоящего backend
+       логин/пароль нужно перенести на сервер.
+    */
+
+    const ADMIN_LOGIN = "admin";
+    const ADMIN_PASSWORD = "RPR_ADMIN_2026";
+
+
+    function getNews() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(NEWS_KEY)
+            ) || [];
+
+        } catch {
+
+            return [];
+
+        }
+
+    }
+
+
+    function saveNews(news) {
+
+        localStorage.setItem(
+            NEWS_KEY,
+            JSON.stringify(news)
+        );
+
+    }
+
+
+    function getLeaders() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(LEADERS_KEY)
+            ) || [];
+
+        } catch {
+
+            return [];
+
+        }
+
+    }
+
+
+    function saveLeaders(leaders) {
+
+        localStorage.setItem(
+            LEADERS_KEY,
+            JSON.stringify(leaders)
+        );
+
+    }
+
+
+    /* ===== PRESS ===== */
+
+    window.renderRprPress = function () {
+
+        const list =
+            document.getElementById(
+                "press-news-list"
+            );
+
+        if (!list) return;
+
+        const news = getNews()
+            .filter(item => item.published)
+            .sort(
+                (a,b) =>
+                    new Date(b.date) -
+                    new Date(a.date)
+            );
+
+
+        if (!news.length) {
+
+            list.innerHTML = `
+                <div class="press-empty">
+                    Новостей пока нет.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        list.innerHTML = news.map(item => {
+
+            const image = item.image
+                ? `
+                    <img
+                        class="press-image"
+                        src="${rprEscapeAttr(item.image)}"
+                        alt=""
+                    >
+                `
+                : `
+                    <div class="press-no-image">
+                        ПРЕСС-СЛУЖБА РПР
+                    </div>
+                `;
+
+
+            return `
+                <article class="press-card">
+
+                    ${image}
+
+                    <div class="press-content">
+
+                        <div class="press-category">
+                            ${rprEscape(item.category)}
+                        </div>
+
+                        <h3>
+                            ${rprEscape(item.title)}
+                        </h3>
+
+                        <div class="press-date">
+                            ${rprFormatDate(item.date)}
+                        </div>
+
+                        <p>
+                            ${rprEscape(item.excerpt)}
+                        </p>
+
+                    </div>
+
+                </article>
+            `;
+
+        }).join("");
+
+    };
+
+
+    window.rprAddNews = function (event) {
+
+        event.preventDefault();
+
+
+        const news = getNews();
+
+
+        news.push({
+
+            id: Date.now(),
+
+            title:
+                document.getElementById(
+                    "rpr-news-title"
+                ).value,
+
+            category:
+                document.getElementById(
+                    "rpr-news-category"
+                ).value,
+
+            image:
+                document.getElementById(
+                    "rpr-news-image"
+                ).value,
+
+            excerpt:
+                document.getElementById(
+                    "rpr-news-excerpt"
+                ).value,
+
+            content:
+                document.getElementById(
+                    "rpr-news-content"
+                ).value,
+
+            date:
+                new Date().toISOString(),
+
+            published: true
+
+        });
+
+
+        saveNews(news);
+
+
+        event.target.reset();
+
+
+        renderRprPress();
+        renderRprAdminNews();
+        updateRprStats();
+
+
+        alert(
+            "Новость опубликована."
+        );
+
+    };
+
+
+    window.rprDeleteNews = function (id) {
+
+        if (
+            !confirm(
+                "Удалить эту новость?"
+            )
+        ) return;
+
+
+        const news =
+            getNews().filter(
+                item => item.id !== id
+            );
+
+
+        saveNews(news);
+
+        renderRprPress();
+        renderRprAdminNews();
+        updateRprStats();
+
+    };
+
+
+    function renderRprAdminNews() {
+
+        const list =
+            document.getElementById(
+                "rpr-news-admin-list"
+            );
+
+        if (!list) return;
+
+
+        const news = getNews();
+
+
+        if (!news.length) {
+
+            list.innerHTML =
+                `<div class="press-empty">
+                    Новостей нет.
+                </div>`;
+
+            return;
+
+        }
+
+
+        list.innerHTML = news
+            .slice()
+            .reverse()
+            .map(item => `
+
+                <div class="rpr-list-item">
+
+                    <div>
+
+                        <small>
+                            ${rprEscape(item.category)}
+                        </small>
+
+                        <div>
+                            <strong>
+                                ${rprEscape(item.title)}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <div class="rpr-actions">
+
+                        <button
+                            class="delete"
+                            onclick="rprDeleteNews(${item.id})"
+                        >
+                            Удалить
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `)
+            .join("");
+
+    }
+
+
+    /* ===== LEADERSHIP ===== */
+
+    window.rprAddLeader = function (event) {
+
+        event.preventDefault();
+
+
+        const leaders =
+            getLeaders();
+
+
+        leaders.push({
+
+            id: Date.now(),
+
+            name:
+                document.getElementById(
+                    "rpr-leader-name"
+                ).value,
+
+            position:
+                document.getElementById(
+                    "rpr-leader-position"
+                ).value,
+
+            image:
+                document.getElementById(
+                    "rpr-leader-image"
+                ).value,
+
+            description:
+                document.getElementById(
+                    "rpr-leader-description"
+                ).value
+
+        });
+
+
+        saveLeaders(leaders);
+
+
+        event.target.reset();
+
+
+        renderRprAdminLeaders();
+        updateRprStats();
+
+
+        alert(
+            "Руководитель добавлен."
+        );
+
+    };
+
+
+    window.rprDeleteLeader = function (id) {
+
+        if (
+            !confirm(
+                "Удалить этого руководителя?"
+            )
+        ) return;
+
+
+        const leaders =
+            getLeaders()
+                .filter(
+                    item => item.id !== id
+                );
+
+
+        saveLeaders(leaders);
+
+        renderRprAdminLeaders();
+        updateRprStats();
+
+    };
+
+
+    function renderRprAdminLeaders() {
+
+        const list =
+            document.getElementById(
+                "rpr-leaders-list"
+            );
+
+        if (!list) return;
+
+
+        const leaders =
+            getLeaders();
+
+
+        if (!leaders.length) {
+
+            list.innerHTML =
+                `<div class="press-empty">
+                    Руководителей пока нет.
+                </div>`;
+
+            return;
+
+        }
+
+
+        list.innerHTML =
+            leaders.map(item => `
+
+                <div class="rpr-list-item">
+
+                    <div>
+
+                        <small>
+                            ${rprEscape(item.position)}
+                        </small>
+
+                        <div>
+                            <strong>
+                                ${rprEscape(item.name)}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <div class="rpr-actions">
+
+                        <button
+                            class="delete"
+                            onclick="rprDeleteLeader(${item.id})"
+                        >
+                            Удалить
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `).join("");
+
+    }
+
+
+    /* ===== ADMIN NAVIGATION ===== */
+
+    window.rprAdminSection =
+        function (section, button) {
+
+
+            document
+                .querySelectorAll(
+                    ".rpr-admin-section"
+                )
+                .forEach(
+                    item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                );
+
+
+            document
+                .getElementById(
+                    "rpr-section-" + section
+                )
+                .classList.add(
+                    "active"
+                );
+
+
+            document
+                .querySelectorAll(
+                    ".rpr-admin-menu button"
+                )
+                .forEach(
+                    item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                );
+
+
+            button.classList.add(
+                "active"
+            );
+
+        };
+
+
+    /* ===== LOGIN ===== */
+
+    window.rprLogin = function () {
+
+        const login =
+            document.getElementById(
+                "rpr-admin-login-input"
+            ).value;
+
+        const password =
+            document.getElementById(
+                "rpr-admin-password-input"
+            ).value;
+
+
+        if (
+            login === ADMIN_LOGIN &&
+            password === ADMIN_PASSWORD
+        ) {
+
+            sessionStorage.setItem(
+                "rpr_admin_auth",
+                "1"
+            );
+
+
+            document.getElementById(
+                "rpr-admin-login"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "rpr-admin-panel"
+            ).style.display =
+                "block";
+
+
+            renderRprAdminLeaders();
+            renderRprAdminNews();
+            updateRprStats();
+
+        } else {
+
+            document.getElementById(
+                "rpr-login-error"
+            ).style.display =
+                "block";
+
+        }
+
+    };
+
+
+    window.openRprAdmin =
+        function () {
+
+            document.getElementById(
+                "rpr-admin-overlay"
+            ).style.display =
+                "block";
+
+
+            if (
+                sessionStorage.getItem(
+                    "rpr_admin_auth"
+                ) === "1"
+            ) {
+
+                document.getElementById(
+                    "rpr-admin-login"
+                ).style.display =
+                    "none";
+
+
+                document.getElementById(
+                    "rpr-admin-panel"
+                ).style.display =
+                    "block";
+
+
+                renderRprAdminLeaders();
+                renderRprAdminNews();
+                updateRprStats();
+
+            } else {
+
+                document.getElementById(
+                    "rpr-admin-login"
+                ).style.display =
+                    "block";
+
+
+                document.getElementById(
+                    "rpr-admin-panel"
+                ).style.display =
+                    "none";
+
+            }
+
+        };
+
+
+    window.closeRprAdmin =
+        function () {
+
+            document.getElementById(
+                "rpr-admin-overlay"
+            ).style.display =
+                "none";
+
+        };
+
+
+    /* ===== CONSOLE /ADMIN ===== */
+
+    window.rprAdminCommand =
+        function () {
+
+            openRprAdmin();
+
+        };
+
+
+    /*
+       Использование:
+
+       rprAdminCommand()
+
+       Также перехватываем ввод /admin
+       в консоли через специальный listener.
+    */
+
+    console.log(
+        "%cRPR ADMIN",
+        "font-size:22px;font-weight:bold;color:#e31d2b"
+    );
+
+    console.log(
+        "Для открытия админ-панели используйте: rprAdminCommand()"
+    );
+
+
+    /* ===== HELPERS ===== */
+
+    function rprEscape(value) {
+
+        return String(
+            value || ""
+        ).replace(
+            /[&<>"']/g,
+            function (char) {
+
+                return {
+
+                    "&":"&amp;",
+                    "<":"&lt;",
+                    ">":"&gt;",
+                    '"':"&quot;",
+                    "'":"&#039;"
+
+                }[char];
+
+            }
+        );
+
+    }
+
+
+    function rprEscapeAttr(value) {
+
+        return rprEscape(value);
+
+    }
+
+
+    function rprFormatDate(date) {
+
+        return new Date(date)
+            .toLocaleDateString(
+                "ru-RU",
+                {
+                    day:"2-digit",
+                    month:"long",
+                    year:"numeric"
+                }
+            );
+
+    }
+
+
+    function updateRprStats() {
+
+        const news =
+            getNews();
+
+        const leaders =
+            getLeaders();
+
+
+        const statNews =
+            document.getElementById(
+                "rpr-stat-news"
+            );
+
+        const statLeaders =
+            document.getElementById(
+                "rpr-stat-leaders"
+            );
+
+        const statPublished =
+            document.getElementById(
+                "rpr-stat-published"
+            );
+
+
+        if (statNews)
+            statNews.textContent =
+                news.length;
+
+
+        if (statLeaders)
+            statLeaders.textContent =
+                leaders.length;
+
+
+        if (statPublished)
+            statPublished.textContent =
+                news.filter(
+                    item => item.published
+                ).length;
+
+    }
+
+
+    /* ===== INIT ===== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            renderRprPress();
+
+            updateRprStats();
+
+        }
+    );
+
+
+})();
+
+
+/* =========================================================
+   ПРИМЕР ОТКРЫТИЯ:
+
+   В F12 → Console:
+
+   rprAdminCommand()
+
+========================================================= */
+</script>
+   
 </html>
